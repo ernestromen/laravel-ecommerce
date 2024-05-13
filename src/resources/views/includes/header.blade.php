@@ -7,9 +7,9 @@
       <meta name="keywords" content="">
       <meta name="description" content="">
       <meta name="author" content="">
-      <link rel="stylesheet" href="css/bootstrap.min.css">
-      <link rel="stylesheet" href="css/style.css">
-      <link rel="stylesheet" href="css/responsive.css">
+      <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
+      <link rel="stylesheet" href="css/style.css?v=1a20">
+      <link rel="stylesheet" href="css/responsive.css?v=1a03">
       <link rel="icon" href="images/fevicon.png" type="image/gif" />
       <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
       <style>
