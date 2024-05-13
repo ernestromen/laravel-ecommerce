@@ -945,3 +945,13 @@ ul.conta li a:hover {
 .inner_page .honey_bg {
      padding-top: 90px;
 }
+
+
+.login_form{
+     border: 2px solid black;
+     padding: 30px;
+     background: #d96226;
+}
+
+/* form css */
+

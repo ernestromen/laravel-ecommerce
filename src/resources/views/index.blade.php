@@ -1,6 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<div class="">
    @include('includes.header')
       <header>
             <div class="full_bg">
@@ -227,5 +224,4 @@
       <!--  footer -->
       @include('includes.footer')
       <!-- end footer -->
-</div>
 </html>
