@@ -11,7 +11,7 @@
 {{csrf_field()}}
   <div class="form-group">
     <label for="exampleInputEmail1">Name</label>
-    <input name="name" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+    <input name="name" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter name">
   </div>
 
   <div class="form-group">

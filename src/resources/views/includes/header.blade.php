@@ -10,10 +10,21 @@
       <meta name="description" content="">
       <meta name="author" content="">
       <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
-      <link rel="stylesheet" href="css/style.css?v=1a20">
-      <link rel="stylesheet" href="css/responsive.css?v=1a03">
+      <link rel="stylesheet" href="{{asset('css/style.css?v=1a20')}}">
+      <link rel="stylesheet" href="{{asset('css/responsive.css?v=1a03')}}">
       <link rel="icon" href="images/fevicon.png" type="image/gif" />
       <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+      <!-- <script language="JavaScript" type="text/javascript" src="/js/jquery-1.2.6.min.js"></script> -->
+      <!-- <script language="JavaScript" type="text/javascript" src="/js/jquery-ui-personalized-1.5.2.packed.js"></script> -->
+      <!-- <script language="JavaScript" type="text/javascript" src="/js/sprinkle.js"></script> -->
+      <script src="{{asset('js/jquery.min.js')}}"></script>
+      <script src="{{asset('js/bootstrap.bundle.min.js')}}"></script>
+      <script src="{{asset('js/jquery-3.0.0.min.js')}}"></script>
+      <!-- <script src="{{asset('js/custom.js?v=9999')}}"></script> -->
+<!-- 
+      <script src="http://code.jquery.com/jquery-3.3.1.min.js"
+ integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+ crossorigin="anonymous"></script> -->
       <style>
 
          header{
@@ -25,11 +36,6 @@
 </head>
    
 <body>
-
-      <div class="loader_bg">
-            <div class="loader"><img src="images/loading.gif" alt="#"/></div>
-      </div>
-
       <header>
          <div class="container-fluid">
                      <div class="row">
@@ -67,7 +73,7 @@
                                  </ul>
                               </div>
                            </nav>
-                        </div>
+                  </div>
 
                         <div class="col-md-2 pt-3">
                               <a href="Javascript:void(0)"><i class="fa fa-user pr-5" aria-hidden="true"></i></a>

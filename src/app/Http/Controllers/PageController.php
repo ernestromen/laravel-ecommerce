@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
-    public function login(Request $request){
+public function login(Request $request){
         dd('login');
     }
 
