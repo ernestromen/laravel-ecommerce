@@ -3,14 +3,34 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PageController extends Controller
 {
-public function login(Request $request){
-        dd('login');
+
+    public function index()
+    {
+        $user = Auth::user() ? Auth::user()->name : '';
+
+        return view("index", ["user" => $user]);
     }
 
-    public function addUser(Request $request){
-        dd('hello');
+    public function register()
+    {
+        return view("register", ["user" => Auth::user()->name]);
+    }
+
+    public function login()
+    {
+
+        $user = Auth::user();
+
+        return view("login");
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect("/");
     }
 }

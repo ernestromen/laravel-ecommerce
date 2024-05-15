@@ -11,12 +11,13 @@ use Illuminate\Support\Str;
 class UserController extends Controller
 {
 
-    public function addUser(Request $request): RedirectResponse{
+    public function addUser(Request $request): RedirectResponse
+    {
 
         $request->validate([
             'name' => 'bail|required|unique:users|max:255',
             'email' => 'required',
-            'password'=> 'required',
+            'password' => 'required',
         ]);
 
         $user = new User();
@@ -26,10 +27,11 @@ class UserController extends Controller
         $user->setRememberToken(Str::random(10));
         $user->save();
         Auth::login($user);
-        return redirect('/');
+        return redirect('/')->with('user', $user);
     }
-    
-    public function test(){
+
+    public function test()
+    {
         dd(Auth::user()->email);
     }
 }
