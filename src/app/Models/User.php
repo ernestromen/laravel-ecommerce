@@ -1,15 +1,16 @@
 <?php
 
 namespace App\Models;
-
+use App\Traits\HasPermissionsTrait;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+// use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use  HasFactory, Notifiable,HasPermissionsTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -36,5 +37,32 @@ class User extends Authenticatable
             "email_verified_at" => "datetime",
             "password" => "hashed",
         ];
+    }
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class,'users_roles','user_id','role_id');
+    }
+    public function hasRole($role)
+    {
+        return $this->roles()->where('name', $role)->exists();
+    }
+
+    public function hasAnyRole($roles)
+    {
+        return $this->roles()->whereIn('name', $roles)->exists();
+    }
+
+    public function assignRole($role)
+    {
+        return $this->roles()->save(
+            Role::whereName($role)->firstOrFail()
+        );
+    }
+
+    public function revokeRole($role)
+    {
+        return $this->roles()->detach(
+            Role::whereName($role)->firstOrFail()
+        );
     }
 }

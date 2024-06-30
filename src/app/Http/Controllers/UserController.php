@@ -30,8 +30,4 @@ class UserController extends Controller
         return redirect('/')->with('user', $user);
     }
 
-    public function test()
-    {
-        dd(Auth::user()->email);
-    }
 }

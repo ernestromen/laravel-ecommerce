@@ -8,29 +8,58 @@ use Illuminate\Support\Facades\Auth;
 class PageController extends Controller
 {
 
+
     public function index()
     {
         $user = Auth::user() ? Auth::user()->name : '';
+        // Auth::user()->roles()->attach(1);
+        
+        // dd(Auth::user()->roles()->getEager());
 
         return view("index", ["user" => $user]);
     }
 
     public function register()
     {
-        return view("register", ["user" => Auth::user()->name]);
+        $user = Auth::user() ? Auth::user()->name : "";
+        return view("register", ["user" => $user]);
     }
 
     public function login()
     {
+        // dd('hello');
+        $user = Auth::user() ? Auth::user()->name : "";
+        // dd($user);
+        return view("login", ["user" => $user]);
+    }
 
-        $user = Auth::user();
 
-        return view("login");
+    public function loginUser(Request $request)
+    {
+        $credentials = $request->only('email', 'password');
+
+        if (Auth::attempt($credentials)) {
+            // Authentication passed...
+            $user = Auth::user();
+            // Now $user holds the authenticated user instance
+            return redirect()->intended('/dashboard'); // Redirect to dashboard or any other desired location
+        }
+
+        // Authentication failed...
+        return back()->withErrors(['email' => 'Invalid email or password']);
     }
 
     public function logout()
     {
         Auth::logout();
         return redirect("/");
+    }
+
+
+    public function dashboard()
+    {
+        $user = Auth::user() ? Auth::user()->name : "";
+
+        return view("dashboard", ["user" => $user]);
     }
 }
