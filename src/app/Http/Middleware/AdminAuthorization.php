@@ -16,8 +16,8 @@ class AdminAuthorization
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // dd(Auth::user());
-        if(!is_null($user = Auth::user())){
+        $userTypeId = Auth::user()->roles()->first()->id;
+        if(!is_null($user = Auth::user()) && $userTypeId == '1'){
             return $next($request);
         }else{
             return redirect("/");

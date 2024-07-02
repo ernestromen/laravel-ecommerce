@@ -26,6 +26,8 @@ class UserController extends Controller
         $user->password = bcrypt($request->password);
         $user->setRememberToken(Str::random(10));
         $user->save();
+        //attach the role_id that is needed 2 or 1 for admin
+        $user->roles()->attach('1');
         Auth::login($user);
         return redirect('/')->with('user', $user);
     }

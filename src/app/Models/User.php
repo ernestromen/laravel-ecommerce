@@ -65,4 +65,8 @@ class User extends Authenticatable
             Role::whereName($role)->firstOrFail()
         );
     }
+
+    public function getName(){
+        
+    }
 }
