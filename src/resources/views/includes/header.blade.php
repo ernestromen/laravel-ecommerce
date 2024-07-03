@@ -80,8 +80,8 @@
                <a href="Javascript:void(0)"><i class="fa fa-search pr-4" style="cursor: pointer;"
                      aria-hidden="true"></i></a>
 
-               @if ($user !== null && $user !== '')
-            <a class="pr-4 " href="Javascript:void(0)"> {{$user}}</a>
+               @if ($currentUser !== null && $currentUser !== '')
+            <a class="pr-4 " href="Javascript:void(0)"> {{$currentUser}}</a>
             <a href="{{ route('logout') }}">Logout</a>
          @else
          <a href="Javascript:void(0)"><i class="fa fa-user pr-5" aria-hidden="true"></i></a>

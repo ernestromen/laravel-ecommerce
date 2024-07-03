@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Role;
+use App\Models\Permission;
 
 class PageController extends Controller
 {
@@ -55,8 +57,11 @@ class PageController extends Controller
 
     public function dashboard()
     {
-        $user = Auth::user() ? Auth::user()->name : "";
+        $currentUser = Auth::user() ? Auth::user()->name : "";
+        $users = User::get()->all();
+        $roles = Role::get()->all();
+        $permissions = Permission::get()->all();
 
-        return view("dashboard", ["user" => $user]);
+        return view("dashboard", ["currentUser" => $currentUser, 'users' => $users, 'roles' => $roles, 'permissions' => $permissions]);
     }
 }
