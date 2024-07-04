@@ -1,4 +1,4 @@
-@include('includes.header', ['user' => $user ? $user : ''])
+@include('includes.header', ['userName' => $userName ? $userName : '','currentUser' => $currentUser ? $currentUser : ''])
 <header>
    <div class="full_bg">
       <div class="slider_main">
@@ -161,12 +161,7 @@
                <figure><img src="images/quality5.png" alt="#" /></figure>
             </div>
          </div>
-         <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
-            <div class="quality-box ">
-               <figure><img src="images/quality6.png" alt="#" /></figure>
-            </div>
-         </div>
-         <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+         <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">currentUser
             <div class="quality-box ">
                <figure><img src="images/quality7.png" alt="#" /></figure>
             </div>

@@ -14,22 +14,23 @@ class PageController extends Controller
 
     public function index()
     {
-        $user = Auth::user() ? Auth::user()->name : '';
-        return view("index", ["user" => $user,]);
+        $currentUser = Auth::user() ? Auth::user()->name : "";
+        $userName = Auth::user() ? Auth::user()->name : '';
+        return view("index", ["userName" => $userName,"currentUser" => $currentUser]);
     }
 
     public function register()
     {
+        $currentUser = Auth::user() ? Auth::user()->name : "";
         $user = Auth::user() ? Auth::user()->name : "";
-        return view("register", ["user" => $user]);
+        return view("register", ["user" => $user,"currentUser" => $currentUser]);
     }
 
     public function login()
     {
-        // dd('hello');
+        $currentUser = Auth::user() ? Auth::user()->name : "";
         $user = Auth::user() ? Auth::user()->name : "";
-        // dd($user);
-        return view("login", ["user" => $user]);
+        return view("login", ["user" => $user,"currentUser" =>$currentUser]);
     }
 
 

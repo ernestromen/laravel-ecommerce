@@ -38,6 +38,7 @@
 
         <button type="submit" class="btn btn-light text-dark">Register</button>
       </form>
+      <a href="{{route('login')}}">Already have a user?</a>
 
 
     </div>

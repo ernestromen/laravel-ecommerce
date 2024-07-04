@@ -35,13 +35,13 @@ class RoleSeeder extends Seeder
         $admin->password = bcrypt('admin');
         $admin->save();
         $admin->roles()->attach($admin);
-        $admin->permissions()->attach($create_post);
+        $admin->permissions()->attach($create_user);
         $user = new User();
         $user->name = 'User';
         $user->email = 'user@gmail.com';
         $user->password = bcrypt('user');
         $user->save();
         $user->roles()->attach($userRole);
-        $user->permissions()->attach($create_user);
+        $user->permissions()->attach($create_post);
     }
 }
