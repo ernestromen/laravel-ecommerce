@@ -10,21 +10,21 @@ class RoleSeeder extends Seeder
     public function run(): void
     {
         $permission = new Permission();
-        $permission->name = 'create-post';
+        $permission->name = 'create-user';
         $permission->save();
         $role = new Role();
         $role->name = 'admin';
         $role->save();
         $role->permissions()->attach($permission);
-        $permission->roles()->attach($role);
+        // $permission->roles()->attach($role);
         $permission = new Permission();
-        $permission->name = 'create-user';
+        $permission->name = 'create-post';
         $permission->save();
         $role = new Role();
         $role->name = 'user';
         $role->save();
         $role->permissions()->attach($permission);
-        $permission->roles()->attach($role);
+        // $permission->roles()->attach($role);
         $admin = Role::where('name', 'admin')->first();
         $userRole = Role::where('name', 'user')->first();
         $create_post = Permission::where('name', 'create-post')->first();

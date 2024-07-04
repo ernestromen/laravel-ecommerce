@@ -27,9 +27,21 @@ class UserController extends Controller
         $user->setRememberToken(Str::random(10));
         $user->save();
         //attach the role_id that is needed 2 or 1 for admin
-        $user->roles()->attach('1');
+        $user->roles()->attach('2');
         Auth::login($user);
         return redirect('/')->with('user', $user);
+    }
+
+    public function updateUser()
+    {
+
+    }
+
+
+    public function deleteUser($id)
+    {
+        User::find($id)->delete();
+        return redirect()->route('dashboard')->with('success', 'User deleted successfully.');
     }
 
 }

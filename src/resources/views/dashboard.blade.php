@@ -32,8 +32,20 @@
                             <td>{{$user->created_at}}</td>
                             <td>{{$user->updated_at}}</td>
                             <td>
-                                <button class="btn btn-success">update</button>
-                                <button class="btn btn-danger">delete</button>
+                                <div class="row">
+                                    <div class="col-6"> <button class="btn btn-success">update</button>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <form action="{{ route('delete-user', [$user->id])}}" method="post">
+                                            @csrf
+                                            <input class="btn btn-danger" type="submit" value="delete" /></i>
+                                            <i class=" pr-3 fa fa-trash-can"></i>
+                                        </form>
+                                        <!-- <button class="btn btn-danger">delete</button> -->
+                                    </div>
+                                </div>
+
 
                             </td>
 

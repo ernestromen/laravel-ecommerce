@@ -20,3 +20,5 @@ Route::get('/logout', [PageController::class, 'logout'])->name('logout');
 Route::get('/dashboard', [PageController::class, 'dashboard'])->name('dashboard')->middleware(AdminAuthorization::class);
 
 Route::post('/register', [UserController::class, 'addUser']);
+
+Route::post('/dashboard/{id}',[UserController::class, 'deleteUser'])->name('delete-user');
