@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Role;
 use App\Models\Permission;
+use App\Models\Category;
+use App\Models\Product;
 
 class PageController extends Controller
 {
@@ -16,21 +18,21 @@ class PageController extends Controller
     {
         $currentUser = Auth::user() ? Auth::user()->name : "";
         $userName = Auth::user() ? Auth::user()->name : '';
-        return view("index", ["userName" => $userName,"currentUser" => $currentUser]);
+        return view("index", ["userName" => $userName, "currentUser" => $currentUser]);
     }
 
     public function register()
     {
         $currentUser = Auth::user() ? Auth::user()->name : "";
         $user = Auth::user() ? Auth::user()->name : "";
-        return view("register", ["user" => $user,"currentUser" => $currentUser]);
+        return view("register", ["user" => $user, "currentUser" => $currentUser]);
     }
 
     public function login()
     {
         $currentUser = Auth::user() ? Auth::user()->name : "";
         $user = Auth::user() ? Auth::user()->name : "";
-        return view("login", ["user" => $user,"currentUser" =>$currentUser]);
+        return view("login", ["user" => $user, "currentUser" => $currentUser]);
     }
 
 
@@ -64,5 +66,21 @@ class PageController extends Controller
         $permissions = Permission::get()->all();
 
         return view("dashboard", ["currentUser" => $currentUser, 'users' => $users, 'roles' => $roles, 'permissions' => $permissions]);
+    }
+
+    public function products()
+    {
+        $currentUser = Auth::user() ? Auth::user()->name : "";
+
+        $products = Product::all();
+        return view("products", ["products" => $products, "currentUser" => $currentUser]);
+    }
+
+    public function categories()
+    {
+        $currentUser = Auth::user() ? Auth::user()->name : "";
+
+        $categories = Category::all();
+        return view("categories", ["categories" => $categories, "currentUser" => $currentUser]);
     }
 }

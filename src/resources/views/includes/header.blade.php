@@ -63,7 +63,7 @@
                            <a class="nav-link" href="about.html">About</a>
                         </li>
                         <li class="nav-item">
-                           <a class="nav-link" href="shop.html">shop</a>
+                           <a class="nav-link" href="{{route('products')}}">shop</a>
                         </li>
                         <li class="nav-item">
                            <a class="nav-link" href="quality.html">quality</a>
@@ -77,13 +77,15 @@
             </div>
 
             <div class="col-md-2 pt-3">
-            <a href="{{ route('login') }}" title="login user"><i class=" pr-3 fa fa-sign-in" aria-hidden="true"></i></a>
+               <a href="{{ route('login') }}" title="login user"><i class=" pr-3 fa fa-sign-in"
+                     aria-hidden="true"></i></a>
                @if ($currentUser !== null && $currentUser !== '')
-            <a class="pr-4 " href="Javascript:void(0)"> {{$currentUser}}</a>
-            <a href="{{ route('logout') }}">Logout</a>
-         @else
-         <a href="{{ route('register') }}" title="register user"><i class="fa fa-user pr-5" aria-hidden="true"></i></a>
-      @endif
+               <a class="pr-4 " href="Javascript:void(0)"> {{$currentUser}}</a>
+               <a href="{{ route('logout') }}">Logout</a>
+            @else
+               <a href="{{ route('register') }}" title="register user"><i class="fa fa-user pr-5"
+                   aria-hidden="true"></i></a>
+            @endif
             </div>
          </div>
       </div>
