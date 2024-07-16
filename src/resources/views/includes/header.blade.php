@@ -43,7 +43,7 @@
                <div class="full">
                   <div class="center-desk">
                      <div class="logo">
-                        <a href="{{route('home')}}"><img src="images/logo1.png" alt="#" /></a>
+                        <a href="{{route('home')}}"><img src="{{asset('images/logo1.png')}}" alt="#" /></a>
                      </div>
                   </div>
                </div>

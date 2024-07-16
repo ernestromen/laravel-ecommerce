@@ -76,6 +76,24 @@ class PageController extends Controller
         return view("products", ["products" => $products, "currentUser" => $currentUser]);
     }
 
+    public function product($id)
+    {
+        $currentProduct = Product::find($id);
+        $currentProductCategory = $currentProduct->category;
+        $currentUser = Auth::user() ? Auth::user()->name : "";
+
+        return view("product", ["id" => $id, "currentUser" => $currentUser, 'currentProduct' => $currentProduct, 'currentProductCategory' => $currentProductCategory]);
+    }
+
+
+    public function category($id)
+    {
+        $currentUser = Auth::user() ? Auth::user()->name : "";
+        $currentCategory = Category::find($id);
+
+        return view("category", ["id" => $id, "currentUser" => $currentUser, 'currentCategory' => $currentCategory]);
+    }
+
     public function categories()
     {
         $currentUser = Auth::user() ? Auth::user()->name : "";

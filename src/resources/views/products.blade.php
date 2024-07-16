@@ -25,7 +25,7 @@
                     @foreach ($products as $product)
                         <tr class="text-center">
                             <th scope="row">{{$product->id}}</th>
-                            <td>{{$product->name}}</td>
+                            <td><a href="{{route('product', ['id' => $product->id])}}">{{$product->name}}</a></td>
                             <td>{{$product->description}}</td>
                             <td>{{$product->price}}</td>
                             <td>{{$product->sku}}</td>

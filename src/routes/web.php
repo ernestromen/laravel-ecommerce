@@ -24,6 +24,9 @@ Route::post('/register', [UserController::class, 'addUser']);
 Route::post('/dashboard/{id}', [UserController::class, 'deleteUser'])->name('delete-user');
 
 Route::get('/products', [PageController::class, 'products'])->name('products');
-;
+
+Route::get('/product/{id}', [PageController::class, 'product'])->name('product');
+
+Route::get('/category/{id}', [PageController::class, 'category'])->name('category');
+
 Route::get('/categories', [PageController::class, 'categories']);
-;
