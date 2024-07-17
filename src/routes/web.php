@@ -30,3 +30,5 @@ Route::get('/product/{id}', [PageController::class, 'product'])->name('product')
 Route::get('/category/{id}', [PageController::class, 'category'])->name('category');
 
 Route::get('/categories', [PageController::class, 'categories']);
+
+Route::post('/categories', [PageController::class, 'downloadCsv'])->name('downloadCsv');

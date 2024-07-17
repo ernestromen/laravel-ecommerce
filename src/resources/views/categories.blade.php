@@ -34,7 +34,10 @@
         <div class="col-2">
 
         </div>
-
+        <form action="{{route('downloadCsv')}}" method="post" class="m-auto">
+            {{csrf_field()}}
+            <button class="btn btn-success">Download</button>
+        </form>
     </div>
 </div>
 @include('includes.footer')
