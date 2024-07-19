@@ -12,10 +12,16 @@ use App\Models\Product;
 use League\Csv\Writer;
 use Response;
 use Illuminate\Support\Facades\Schema;
+use App\Services\DownloadTableData;
 
 class PageController extends Controller
 {
+    protected $downloadTableData;
 
+    public function __construct(DownloadTableData $downloadTableData)
+    {
+        $this->downloadTableData = $downloadTableData;
+    }
 
     public function index()
     {
@@ -107,32 +113,6 @@ class PageController extends Controller
 
     public function downloadCsv()
     {
-        $csv = Writer::createFromString('');
-        $categories = Category::all();
-        $tableName = $categories->first()->getTable();
-        $columns = Schema::getColumnListing($tableName);
-
-        $csv->insertOne($columns);
-
-        foreach ($categories as $category) {
-
-            $rowData = [];
-
-            foreach ($columns as $col => $val) {
-
-                $rowData[] = $category->$val;
-
-
-            }
-            $csv->insertOne($rowData);
-
-        }
-
-        $headers = [
-            'Content-Type' => 'text/csv',
-            'Content-Disposition' => 'attachment; filename="categories.csv"',
-        ];
-
-        return Response::make($csv->getContent(), 200, $headers);
+        return $this->downloadTableData->execute();
     }
 }
