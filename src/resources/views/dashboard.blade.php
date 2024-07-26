@@ -1,13 +1,14 @@
 @include('includes.header')
 
 <h1 class="text-center text-black my-5">dashboard</h1>
-<div class="cotnainer">
+<div class="cotnainer text-center">
     <h2 class="text-center my-5">Users</h2>
     <div class="row">
         <div class="col-3">
 
         </div>
         <div class="col-6">
+            @csvButton($users)
             <table class="table">
                 <thead>
                     <tr class="text-center">
@@ -42,7 +43,6 @@
                                             <input class="btn btn-danger" type="submit" value="delete" /></i>
                                             <i class=" pr-3 fa fa-trash-can"></i>
                                         </form>
-                                        <!-- <button class="btn btn-danger">delete</button> -->
                                     </div>
                                 </div>
 
@@ -63,6 +63,7 @@
     <div class="row mt-5">
         <div class="col-4"></div>
         <div class="col-4">
+            @csvButton($roles)
             <table class="table">
                 <thead>
                     <tr class="text-center">
@@ -95,6 +96,7 @@
     <div class="row mt-5">
         <div class="col-4"></div>
         <div class="col-4">
+        @csvButton($permissions)
             <table class="table">
                 <thead>
                     <tr class="text-center">

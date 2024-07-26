@@ -9,22 +9,24 @@ use Illuminate\Support\Facades\Schema;
 
 class DownloadTableData
 {
-    public function execute()
+    public function execute($entityName)
     {
+        $modelPath = 'App\Models\\';
+        $finalModelPath = $modelPath . $entityName;
+        $tableDataToBeDownloaded = resolve($finalModelPath)::all();
         $csv = Writer::createFromString('');
-        $categories = Category::all();
-        $tableName = $categories->first()->getTable();
+        $tableName = $tableDataToBeDownloaded->first()->getTable();
         $columns = Schema::getColumnListing($tableName);
 
         $csv->insertOne($columns);
 
-        foreach ($categories as $category) {
+        foreach ($tableDataToBeDownloaded as $entity) {
 
             $rowData = [];
 
             foreach ($columns as $col => $val) {
 
-                $rowData[] = $category->$val;
+                $rowData[] = $entity->$val;
 
 
             }
@@ -34,7 +36,7 @@ class DownloadTableData
 
         $headers = [
             'Content-Type' => 'text/csv',
-            'Content-Disposition' => 'attachment; filename="categories.csv"',
+            'Content-Disposition' => 'attachment; filename="list.csv"',
         ];
 
         return Response::make($csv->getContent(), 200, $headers);

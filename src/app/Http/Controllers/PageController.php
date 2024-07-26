@@ -70,9 +70,9 @@ class PageController extends Controller
     public function dashboard()
     {
         $currentUser = Auth::user() ? Auth::user()->name : "";
-        $users = User::get()->all();
-        $roles = Role::get()->all();
-        $permissions = Permission::get()->all();
+        $users = User::all();
+        $roles = Role::all();
+        $permissions = Permission::all();
 
         return view("dashboard", ["currentUser" => $currentUser, 'users' => $users, 'roles' => $roles, 'permissions' => $permissions]);
     }
@@ -106,13 +106,12 @@ class PageController extends Controller
     public function categories()
     {
         $currentUser = Auth::user() ? Auth::user()->name : "";
-
         $categories = Category::all();
         return view("categories", ["categories" => $categories, "currentUser" => $currentUser]);
     }
 
-    public function downloadCsv()
+    public function downloadCsv($entityName)
     {
-        return $this->downloadTableData->execute();
+        return $this->downloadTableData->execute($entityName);
     }
 }

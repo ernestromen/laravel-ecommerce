@@ -32,5 +32,8 @@ class AppServiceProvider extends ServiceProvider
         Blade::directive('endrole', function ($role) {
             return "<?php endif; ?>";
         });
+        Blade::directive('csvButton', function ($expression) {
+            return "<?php echo '<form action=\"' . route('downloadCsv', ['string' => \App\Helpers\Helper::findEntityName($expression)]) . '\" method=\"post\" class=\"m-auto text-right\">' . csrf_field() . '<button class=\"btn btn-success rounded-circle mb-2\"> <i class=\"fa fa-download\" aria-hidden=\"true\" title=\"Download\"></i></button></form>'; ?>";
+        });
     }
 }

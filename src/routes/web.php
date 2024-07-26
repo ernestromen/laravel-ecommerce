@@ -31,4 +31,4 @@ Route::get('/category/{id}', [PageController::class, 'category'])->name('categor
 
 Route::get('/categories', [PageController::class, 'categories']);
 
-Route::post('/categories', [PageController::class, 'downloadCsv'])->name('downloadCsv');
+Route::post('/categories/{string}', [PageController::class, 'downloadCsv'])->name('downloadCsv');

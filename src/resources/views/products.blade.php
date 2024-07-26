@@ -7,6 +7,7 @@
 
         </div>
         <div class="col-8">
+            @csvButton($products)       
             <table class="table">
                 <thead>
                     <tr class="text-center">
@@ -14,10 +15,10 @@
                         <th scope="col">Name</th>
                         <th scope="col">Email</th>
                         <th scope="col">Role_id</th>
+                        <th scope="col">SKU</th>
+                        <th scope="col">Quantity</th>
                         <th scope="col">Created at</th>
                         <th scope="col">Updated at</th>
-                        <th scope="col"></th>
-                        <th scope="col"></th>
 
                     </tr>
                 </thead>
@@ -40,7 +41,6 @@
         <div class="col-2">
 
         </div>
-
     </div>
 </div>
 @include('includes.footer')
