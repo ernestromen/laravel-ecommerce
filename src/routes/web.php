@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Middleware\AdminAuthorization;
 
@@ -21,7 +22,7 @@ Route::get('/dashboard', [PageController::class, 'dashboard'])->name('dashboard'
 
 Route::post('/register', [UserController::class, 'addUser']);
 
-Route::post('/dashboard/{id}', [UserController::class, 'deleteUser'])->name('delete-user');
+Route::post('/dashboard/{id}', [UserController::class, 'deleteUser'])->name('delete_user');
 
 Route::get('/products', [PageController::class, 'products'])->name('products');
 
@@ -31,4 +32,8 @@ Route::get('/category/{id}', [PageController::class, 'category'])->name('categor
 
 Route::get('/categories', [PageController::class, 'categories']);
 
-Route::post('/categories/{string}', [PageController::class, 'downloadCsv'])->name('downloadCsv');
+Route::post('/download-csv/{entityName}', [PageController::class, 'downloadCsv'])->name('download_csv');
+
+Route::get('/edit-product/{id}', [ProductController::class, 'edit'])->name('edit_product');
+
+Route::post('/edit-product/{id}', [ProductController::class, 'update']);

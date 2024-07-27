@@ -9,7 +9,7 @@
         </div>
         <div class="col-6">
             @csvButton($users)
-            <table class="table">
+            <table class="table border">
                 <thead>
                     <tr class="text-center">
                         <th scope="col">#</th>
@@ -38,7 +38,7 @@
                                     </div>
 
                                     <div class="col-6">
-                                        <form action="{{ route('delete-user', [$user->id])}}" method="post">
+                                        <form action="{{ route('delete_user', [$user->id])}}" method="post">
                                             @csrf
                                             <input class="btn btn-danger" type="submit" value="delete" /></i>
                                             <i class=" pr-3 fa fa-trash-can"></i>
@@ -64,7 +64,7 @@
         <div class="col-4"></div>
         <div class="col-4">
             @csvButton($roles)
-            <table class="table">
+            <table class="table border">
                 <thead>
                     <tr class="text-center">
                         <th scope="col">#</th>
@@ -97,7 +97,7 @@
         <div class="col-4"></div>
         <div class="col-4">
         @csvButton($permissions)
-            <table class="table">
+            <table class="table border">
                 <thead>
                     <tr class="text-center">
                         <th scope="col">#</th>

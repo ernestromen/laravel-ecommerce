@@ -7,19 +7,22 @@
 
         </div>
         <div class="col-8">
-            @csvButton($products)       
-            <table class="table">
+            @csvButton($products)
+            <table class="table border">
                 <thead>
                     <tr class="text-center">
                         <th scope="col">#</th>
                         <th scope="col">Name</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Role_id</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Price</th>
                         <th scope="col">SKU</th>
                         <th scope="col">Quantity</th>
                         <th scope="col">Created at</th>
                         <th scope="col">Updated at</th>
-
+                        @role('admin')
+                        <th></th>
+                        <th></th>
+                        @endrole
                     </tr>
                 </thead>
                 <tbody>
@@ -33,6 +36,13 @@
                             <td>{{$product->quantity}}</td>
                             <td>{{$product->created_at}}</td>
                             <td>{{$product->updated_at}}</td>
+                            @role('admin')
+                            <td> <a href="{{route('edit_product',["id"=>$product->id])}}" class="btn btn-success">update</a>
+                            </td>
+                            <td>
+                                <button class="btn btn-danger">delete</button>
+
+                            </td> @endrole
                         </tr>
                     @endforeach
                 </tbody>

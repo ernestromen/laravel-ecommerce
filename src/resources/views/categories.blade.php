@@ -4,19 +4,21 @@
     <h2 class="text-center my-5">Categories</h2>
     <div class="row">
         <div class="col-2">
-
         </div>
         <div class="col-8">
             @csvButton($categories)
-            <table class="table">
+            <table class="table border">
                 <thead>
                     <tr class="text-center">
                         <th scope="col">#</th>
                         <th scope="col">Name</th>
-                        <th scope="col">Email</th>
+                        <th scope="col">Description</th>
                         <th scope="col">Created at</th>
                         <th scope="col">Updated at</th>
-
+                        @role('admin')
+                        <th></th>
+                        <th></th>
+                        @endrole
                     </tr>
                 </thead>
                 <tbody>
@@ -27,6 +29,13 @@
                             <td>{{$category->description}}</td>
                             <td>{{$category->created_at}}</td>
                             <td>{{$category->updated_at}}</td>
+                            @role('admin')
+                            <td> <a href="" class="btn btn-success">update</a>
+                            </td>
+                            <td>
+                                <button class="btn btn-danger">delete</button>
+
+                            </td> @endrole
                         </tr>
                     @endforeach
                 </tbody>
