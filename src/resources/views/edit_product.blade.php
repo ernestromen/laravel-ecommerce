@@ -9,28 +9,29 @@
                 {{csrf_field()}}
                 <div class="form-group">
                     <label for="nameInput">Name</label>
-                    <input name="name" type="text" class="form-control" id="nameInput"
-                        aria-describedby="nameHelp" placeholder="Enter Name" value="{{$product->name}}">
+                    <input name="name" type="text" class="form-control" id="nameInput" aria-describedby="nameHelp"
+                        placeholder="Enter Name" value="{{$product->name}}">
                 </div>
 
 
                 <div class="form-group">
                     <label for="descriptionInput">Description</label>
                     <input name="description" type="text" class="form-control" id="descriptionInput"
-                        aria-describedby="descriptionHelp" placeholder="Enter Description" value="{{$product->description}}">
+                        aria-describedby="descriptionHelp" placeholder="Enter Description"
+                        value="{{$product->description}}">
                 </div>
 
                 <div class="form-group">
                     <label for="priceInput">Price</label>
-                    <input name="price" type="text" class="form-control" id="priceInput"
-                        aria-describedby="pricenHelp" placeholder="Enter Price" value="{{$product->price}}">
+                    <input name="price" type="text" class="form-control" id="priceInput" aria-describedby="pricenHelp"
+                        placeholder="Enter Price" value="{{$product->price}}">
                 </div>
 
 
                 <div class="form-group">
                     <label for="skuInput">SKU</label>
-                    <input name="SKU" type="text" class="form-control" id="skuInput"
-                        aria-describedby="skuHelp" placeholder="Enter SKU" value="{{$product->sku}}">
+                    <input name="SKU" type="text" class="form-control" id="skuInput" aria-describedby="skuHelp"
+                        placeholder="Enter SKU" value="{{$product->sku}}">
                 </div>
                 <div class="form-group">
                     <label for="quantityInput">Quantity</label>
@@ -42,7 +43,6 @@
 
                 <button type="submit" class="btn btn-light text-dark">Update</button>
             </form>
-         
 
 
         </div>

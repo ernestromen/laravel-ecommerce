@@ -37,11 +37,20 @@
                             <td>{{$product->created_at}}</td>
                             <td>{{$product->updated_at}}</td>
                             @role('admin')
-                            <td> <a href="{{route('edit_product',["id"=>$product->id])}}" class="btn btn-success">update</a>
+                            <td> <a href="{{route('edit_product', ["id" => $product->id])}}"
+                                    class="btn btn-success rounded-circle"><i class="fa fa-pencil-square-o"
+                                        aria-hidden="true" title="delete category">
+
+                                    </i></a>
                             </td>
                             <td>
-                                <button class="btn btn-danger">delete</button>
+                                <form action={{route('delete_product', ['id' => $product])}} method="post" class="m-auto">
+                                    {{csrf_field()}}
+                                    <button class="btn btn-danger rounded-circle mb-2">
+                                        <i class="fa fa-trash-o fa-lg" aria-hidden="true" title="delete model">
 
+                                        </i></button>
+                                </form>
                             </td> @endrole
                         </tr>
                     @endforeach

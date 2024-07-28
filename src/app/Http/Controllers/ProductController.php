@@ -8,7 +8,7 @@ use App\Models\Product;
 
 class ProductController extends Controller
 {
-    
+
     public function index()
     {
         //
@@ -33,7 +33,7 @@ class ProductController extends Controller
     {
         $currentUser = Auth::user() ? Auth::user()->name : "";
         $product = Product::find($id);
-        return view("edit_product",["currentUser" => $currentUser,"product"=>$product]);
+        return view("edit_product", ["currentUser" => $currentUser, "product" => $product]);
     }
 
     public function update(Request $request, string $id)
@@ -51,7 +51,7 @@ class ProductController extends Controller
 
     public function destroy(string $id)
     {
-        $product = Product::find($id);
-        $product->delete();
+        Product::destroy($id);
+        return redirect('/products');
     }
 }
