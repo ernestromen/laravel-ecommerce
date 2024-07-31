@@ -34,14 +34,18 @@
                             <td>{{$user->updated_at}}</td>
                             <td>
                                 <div class="row">
-                                    <div class="col-6"> <button class="btn btn-success">update</button>
+                                    <div class="col-6"> <a href="{{route('edit_user', ["id" => $user->id])}}"
+                                            class="btn btn-success rounded-circle"><i class="fa fa-pencil-square-o"
+                                                aria-hidden="true" title="delete category">
+                                            </i></a>
                                     </div>
 
                                     <div class="col-6">
-                                        <form action="{{ route('delete_user', [$user->id])}}" method="post">
-                                            @csrf
-                                            <input class="btn btn-danger" type="submit" value="delete" /></i>
-                                            <i class=" pr-3 fa fa-trash-can"></i>
+                                        <form action={{route('delete_user', ['id' => $user])}} method="post" class="m-auto">
+                                            {{csrf_field()}}
+                                            <button class="btn btn-danger rounded-circle mb-2">
+                                                <i class="fa fa-trash-o fa-lg" aria-hidden="true" title="delete model">
+                                                </i></button>
                                         </form>
                                     </div>
                                 </div>
@@ -61,15 +65,16 @@
     </div>
     <h3 class="text-center my-5">Roles</h3>
     <div class="row mt-5">
-        <div class="col-4"></div>
-        <div class="col-4">
+        <div class="col-3"></div>
+        <div class="col-6">
             @csvButton($roles)
             <table class="table border">
                 <thead>
                     <tr class="text-center">
                         <th scope="col">#</th>
                         <th scope="col">Name</th>
-                        <th scope="col">Email</th>
+                        <th scope="col">Created at</th>
+                        <th scope="col">Updated at</th>
 
                     </tr>
                 </thead>
@@ -78,10 +83,26 @@
                         <tr class="text-center">
                             <th scope="row">{{$role->id}}</th>
                             <td>{{$role->name}}</td>
-                            <td>
-                                <button class="btn btn-success">update</button>
-                                <button class="btn btn-danger">delete</button>
+                            <td>{{$role->created_at}}</td>
+                            <td>{{$role->updated_at}}</td>
 
+                            <td>
+                                <div class="row">
+                                    <div class="col-6"> <a href="{{route('edit_role', ["id" => $role->id])}}"
+                                            class="btn btn-success rounded-circle"><i class="fa fa-pencil-square-o"
+                                                aria-hidden="true" title="delete category">
+                                            </i></a>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <form action={{route('delete_role', ['id' => $role])}} method="post" class="m-auto">
+                                            {{csrf_field()}}
+                                            <button class="btn btn-danger rounded-circle mb-2">
+                                                <i class="fa fa-trash-o fa-lg" aria-hidden="true" title="delete model">
+                                                </i></button>
+                                        </form>
+                                    </div>
+                                </div>
                             </td>
 
                         </tr>
@@ -89,20 +110,21 @@
                 </tbody>
             </table>
         </div>
-        <div class="col-4"></div>
+        <div class="col-3"></div>
 
     </div>
     <h4 class="text-center my-5">Permissions</h4>
     <div class="row mt-5">
-        <div class="col-4"></div>
-        <div class="col-4">
-        @csvButton($permissions)
+        <div class="col-3"></div>
+        <div class="col-6">
+            @csvButton($permissions)
             <table class="table border">
                 <thead>
                     <tr class="text-center">
                         <th scope="col">#</th>
                         <th scope="col">Name</th>
-                        <th scope="col">Email</th>
+                        <th scope="col">Created at</th>
+                        <th scope="col">Updated at</th>
 
                     </tr>
                 </thead>
@@ -111,10 +133,27 @@
                         <tr class="text-center">
                             <th scope="row">{{$permission->id}}</th>
                             <td>{{$permission->name}}</td>
-                            <td>
-                                <button class="btn btn-success">update</button>
-                                <button class="btn btn-danger">delete</button>
+                            <td>{{$permission->created_at}}</td>
+                            <td>{{$permission->updated_at}}</td>
 
+                            <td>
+                                <div class="row">
+                                    <div class="col-6"> <a href="{{route('edit_permission', ["id" => $permission->id])}}"
+                                            class="btn btn-success rounded-circle"><i class="fa fa-pencil-square-o"
+                                                aria-hidden="true" title="delete permission">
+                                            </i></a>
+                                    </div>
+
+                                    <div class="col-6">
+
+                                        <form action={{route('delete_permission', ['id' => $permission])}} method="post">
+                                            {{csrf_field()}}
+                                            <button class="btn btn-danger rounded-circle mb-2">
+                                                <i class="fa fa-trash-o fa-lg" aria-hidden="true" title="delete model">
+                                                </i></button>
+                                        </form>
+                                    </div>
+                                </div>
                             </td>
 
                         </tr>
@@ -122,7 +161,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="col-4"></div>
+        <div class="col-3"></div>
 
     </div>
 </div>

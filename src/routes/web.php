@@ -5,7 +5,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\RoleController;
 use App\Http\Middleware\AdminAuthorization;
 
 Route::get('/', [PageController::class, 'index'])->name('home');
@@ -23,7 +24,7 @@ Route::get('/dashboard', [PageController::class, 'dashboard'])->name('dashboard'
 
 Route::post('/register', [UserController::class, 'addUser']);
 
-Route::post('/dashboard/{id}', [UserController::class, 'deleteUser'])->name('delete_user');
+Route::post('/dashboard/{id}', [UserController::class, 'destroy'])->name('delete_user');
 
 Route::get('/products', [PageController::class, 'products'])->name('products');
 
@@ -43,3 +44,15 @@ Route::post('/edit-category/{id}', [CategoryController::class, 'update']);
 
 Route::post('/products/{id}', [ProductController::class, 'destroy'])->name('delete_product');
 Route::post('/categories/{id}', [CategoryController::class, 'destroy'])->name('delete_category');
+
+Route::get('/edit-user/{id}', [UserController::class, 'edit'])->name('edit_user');
+Route::post('/edit-user/{id}', [UserController::class, 'update']);
+Route::post('/permission-delete/{id}', [UserController::class, 'destroy'])->name('delete_user');
+
+Route::get('/edit-permission/{id}', [PermissionController::class, 'edit'])->name('edit_permission');
+Route::post('/edit-permission/{id}', [PermissionController::class, 'update']);
+Route::post('/permission-delete/{id}', [PermissionController::class, 'destroy'])->name('delete_permission');
+
+Route::get('/edit-role/{id}', [RoleController::class, 'edit'])->name('edit_role');
+Route::post('/edit-role/{id}', [RoleController::class, 'update']);
+Route::post('/role-delete/{id}', [RoleController::class, 'destroy'])->name('delete_role');

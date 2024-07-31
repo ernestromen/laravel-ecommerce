@@ -32,15 +32,26 @@ class UserController extends Controller
         return redirect('/')->with('user', $user);
     }
 
-    public function updateUser()
-    {
+    public function edit(string $id){
+        $currentUser = Auth::user() ? Auth::user()->name : "";
+        $user = User::find($id);
+        return view("edit_user", ["currentUser" => $currentUser, "user" => $user]);
+    }
 
+    public function update(Request $request, string $id)
+    {
+        $user = User::find($id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->save();
+
+        return redirect('/dashboard');
     }
 
 
-    public function deleteUser($id)
+    public function destroy($id)
     {
-        User::find($id)->delete();
+        User::destroy($id);
         return redirect()->route('dashboard')->with('success', 'User deleted successfully.');
     }
 
