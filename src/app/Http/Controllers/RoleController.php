@@ -9,11 +9,6 @@ use App\Models\Role;
 class RoleController extends Controller
 {
 
-    public function index()
-    {
-        //
-    }
-
     public function create()
     {
         //
@@ -24,10 +19,6 @@ class RoleController extends Controller
         //
     }
 
-    public function show(string $id)
-    {
-        //
-    }
 
     public function edit(string $id)
     {
@@ -48,5 +39,6 @@ class RoleController extends Controller
     public function destroy(string $id)
     {
         Role::destroy($id);
-        return redirect('/dashboard');    }
+        return redirect('/dashboard');
+    }
 }

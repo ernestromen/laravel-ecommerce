@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LeadController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PageController;
@@ -8,8 +9,14 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Middleware\AdminAuthorization;
+use App\Mail\leadAcquired;
 
 Route::get('/', [PageController::class, 'index'])->name('home');
+Route::post('/save-lead', [LeadController::class, 'store'])->name('save_lead');
+Route::get('/leads', [LeadController::class, 'index'])->middleware(AdminAuthorization::class)->name('leads');
+Route::post('/lead-delete/{id}', [LeadController::class, 'destroy'])->name('delete_lead');
+Route::get('/lead/{id}', [LeadController::class, 'edit'])->name('edit_lead');
+Route::post('/lead/{id}', [LeadController::class, 'update']);
 
 Route::view('/about', 'about');
 
@@ -32,7 +39,7 @@ Route::get('/product/{id}', [PageController::class, 'product'])->name('product')
 
 Route::get('/category/{id}', [PageController::class, 'category'])->name('category');
 
-Route::get('/categories', [PageController::class, 'categories']);
+Route::get('/categories', [PageController::class, 'categories'])->name('categories');
 
 Route::post('/download-csv/{entityName}', [PageController::class, 'downloadCsv'])->name('download_csv');
 

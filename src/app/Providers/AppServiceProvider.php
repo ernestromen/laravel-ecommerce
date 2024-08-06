@@ -6,17 +6,31 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use App\Services\DownloadTableData;
-
+use App\Events\testEvent;
+use App\Listeners\SendDownloadNotification;
+use Illuminate\Support\Facades\Event;
 class AppServiceProvider extends ServiceProvider
 {
+
     public function register(): void
     {
         $this->app->bind('DownloadTableData', function ($app) {
             return new DownloadTableData();
         });
+        Event::listen(
+            SendDownloadNotification::class,
+        );
     }
+    protected $listen = [
+        testEvent::class => [
+            SendOrderConfirmation::class,
+        ],
+    ];
     public function boot(): void
     {
+        Event::listen(
+            SendDownloadNotification::class,
+        );
         try {
             Permission::get()->map(function ($permission) {
                 Gate::define($permission->name, function ($user) use ($permission) {

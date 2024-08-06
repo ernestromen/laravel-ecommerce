@@ -14,7 +14,6 @@
         </div>
         <div class="col-md-6">
             <h2>{{$currentProduct->name}}</h2>
-            <!-- <p class="text-muted">{{$currentProductCategory->name}}</p> -->
             <a class="text-muted"
                 href="{{route('category', ['id' => $currentProductCategory->id])}}">{{$currentProductCategory->name}}</a>
 

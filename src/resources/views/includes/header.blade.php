@@ -60,13 +60,13 @@
                            <a class="nav-link" href="index.html">Home</a>
                         </li>
                         <li class="nav-item">
-                           <a class="nav-link" href="about.html">About</a>
+                           <a class="nav-link" href="{{route('categories')}}">Categories</a>
                         </li>
                         <li class="nav-item">
-                           <a class="nav-link" href="{{route('products')}}">shop</a>
+                           <a class="nav-link" href="{{route('products')}}">Products</a>
                         </li>
                         <li class="nav-item">
-                           <a class="nav-link" href="quality.html">quality</a>
+                           <a class="nav-link" href="{{route('leads')}}">Leads</a>
                         </li>
                         <li class="nav-item">
                            <a class="nav-link" href="contact.html">Contact Us</a>

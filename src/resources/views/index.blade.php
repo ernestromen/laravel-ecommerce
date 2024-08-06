@@ -1,4 +1,4 @@
-@include('includes.header', ['userName' => $userName ? $userName : '','currentUser' => $currentUser ? $currentUser : ''])
+@include('includes.header', ['userName' => $userName ? $userName : '', 'currentUser' => $currentUser ? $currentUser : ''])
 <header>
    <div class="full_bg">
       <div class="slider_main">
@@ -188,22 +188,27 @@
             </div>
          </div>
          <div class="col-md-10 offset-md-1 ">
-            <form id="request" class="main_form">
+            <form action={{route('save_lead')}} method="post" id="request" class="main_form">
+               {{csrf_field()}}
                <div class="row">
                   <div class="col-md-6 ">
-                     <input class="contactus" placeholder="Full Name" type="type" name=" Name">
+                     <input class="contactus" placeholder="First Name" type="type" name="firstname">
+                  </div>
+                  <div class="col-md-6 ">
+                     <input class="contactus" placeholder="Last Name" type="type" name="lastname">
                   </div>
                   <div class="col-md-6">
-                     <input class="contactus" placeholder="Email" type="type" name="Email">
+                     <input class="contactus" placeholder="Email" type="type" name="email">
                   </div>
                   <div class="col-md-6">
-                     <input class="contactus" placeholder="Phone Number" type="type" name="Phone Number">
+                     <input class="contactus" placeholder="Phone" type="type" name="phone">
                   </div>
                   <div class="col-md-6">
-                     <textarea class="textarea" placeholder="Message" type="type" Message="Name"></textarea>
+                     <input class="contactus" placeholder="Message" type="type" name="message">
                   </div>
+
                   <div class="col-md-12">
-                     <button class="send_btn">Send</button>
+                     <button type="submit" class="send_btn">Send</button>
                   </div>
                </div>
             </form>

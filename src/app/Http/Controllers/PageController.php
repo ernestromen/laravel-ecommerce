@@ -12,15 +12,16 @@ use App\Models\Product;
 use League\Csv\Writer;
 use Response;
 use Illuminate\Support\Facades\Schema;
-use App\Services\DownloadTableData;
+use App\Events\testEvent;
+use Illuminate\Support\Facades\Log;
 
 class PageController extends Controller
 {
     protected $downloadTableData;
 
-    public function __construct(DownloadTableData $downloadTableData)
+    public function __construct(testEvent $testEvent)
     {
-        $this->downloadTableData = $downloadTableData;
+        $this->testEvent = $testEvent;
     }
 
     public function index()
