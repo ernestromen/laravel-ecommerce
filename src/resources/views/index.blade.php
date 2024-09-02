@@ -1,4 +1,4 @@
-@include('includes.header', ['userName' => $userName ? $userName : '', 'currentUser' => $currentUser ? $currentUser : ''])
+@include('includes.header')
 <header>
    <div class="full_bg">
       <div class="slider_main">

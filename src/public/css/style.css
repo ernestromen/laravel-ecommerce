@@ -1149,3 +1149,48 @@ ul.conta li a:hover {
        top: -85px;
      }
    }
+
+   .removeScroll{
+     overflow-x: hidden;
+   }
+
+
+   .user-container {
+     /* max-width: 600px;
+     margin: 0 auto;
+     background: white;
+     padding: 20px;
+     border-radius: 8px;
+     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+ }
+
+ .user-info {
+     text-align: center;
+ }
+
+ .user-info .avatar {
+     width: 150px;
+     height: 150px;
+     border-radius: 50%;
+     object-fit: cover;
+     margin-bottom: 20px;
+ }
+
+ .user-actions {
+     text-align: center;
+     margin-top: 20px;
+ }
+
+ .user-actions .button {
+     display: inline-block;
+     background-color: #007bff;
+     color: white;
+     padding: 10px 20px;
+     text-decoration: none;
+     border-radius: 4px;
+     margin: 5px;
+ }
+
+ .user-actions .button:hover {
+     background-color: #0056b3;
+ }

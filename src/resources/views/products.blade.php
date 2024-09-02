@@ -1,6 +1,6 @@
 @include('includes.header')
 
-<div class="cotnainer">
+<div class="container ">
     <h2 class="text-center my-5">Products</h2>
     <div class="row">
         <div class="col-2">

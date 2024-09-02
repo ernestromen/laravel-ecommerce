@@ -22,7 +22,6 @@ class ProductsTableSeeder extends Seeder
                 'sku' => 'PROD1',
                 'quantity' => 100,
                 'weight' => 1.5,
-                'image' => 'https://example.com/product1.jpg',
                 'category_id' => 1,
             ],
             [
@@ -32,7 +31,6 @@ class ProductsTableSeeder extends Seeder
                 'sku' => 'PROD2',
                 'quantity' => 50,
                 'weight' => 2.0,
-                'image' => 'https://example.com/product2.jpg',
                 'category_id' => 2,
             ],
             // Add more products as needed

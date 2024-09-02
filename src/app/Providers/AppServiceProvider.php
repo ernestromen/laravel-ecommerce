@@ -9,6 +9,9 @@ use App\Services\DownloadTableData;
 use App\Events\testEvent;
 use App\Listeners\SendDownloadNotification;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\View;
+
 class AppServiceProvider extends ServiceProvider
 {
 
@@ -16,6 +19,10 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind('DownloadTableData', function ($app) {
             return new DownloadTableData();
+        });
+
+        View::composer('*', function ($view) {
+            $view->with('currentUser', Auth::user());
         });
         Event::listen(
             SendDownloadNotification::class,

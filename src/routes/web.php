@@ -9,11 +9,16 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Middleware\AdminAuthorization;
+use App\Http\Middleware\ShareAuthenticatedUser;
 use App\Mail\leadAcquired;
+
+Route::middleware(AdminAuthorization::class)->group(function () {
+    Route::get('/leads', [LeadController::class, 'index'])->name('leads');
+    Route::get('/dashboard', [PageController::class, 'dashboard'])->name('dashboard');
+});
 
 Route::get('/', [PageController::class, 'index'])->name('home');
 Route::post('/save-lead', [LeadController::class, 'store'])->name('save_lead');
-Route::get('/leads', [LeadController::class, 'index'])->middleware(AdminAuthorization::class)->name('leads');
 Route::post('/lead-delete/{id}', [LeadController::class, 'destroy'])->name('delete_lead');
 Route::get('/lead/{id}', [LeadController::class, 'edit'])->name('edit_lead');
 Route::post('/lead/{id}', [LeadController::class, 'update']);
@@ -26,8 +31,6 @@ Route::post('/login', [PageController::class, 'loginUser']);
 Route::get('/register', [PageController::class, 'register'])->name('register');
 
 Route::get('/logout', [PageController::class, 'logout'])->name('logout');
-
-Route::get('/dashboard', [PageController::class, 'dashboard'])->name('dashboard')->middleware(AdminAuthorization::class);
 
 Route::post('/register', [UserController::class, 'addUser']);
 
@@ -54,7 +57,7 @@ Route::post('/categories/{id}', [CategoryController::class, 'destroy'])->name('d
 
 Route::get('/edit-user/{id}', [UserController::class, 'edit'])->name('edit_user');
 Route::post('/edit-user/{id}', [UserController::class, 'update']);
-Route::post('/permission-delete/{id}', [UserController::class, 'destroy'])->name('delete_user');
+Route::post('/permission-delete/{id}', [UserController::class, 'destroy'])->name('delete_permission');
 
 Route::get('/edit-permission/{id}', [PermissionController::class, 'edit'])->name('edit_permission');
 Route::post('/edit-permission/{id}', [PermissionController::class, 'update']);
@@ -63,3 +66,8 @@ Route::post('/permission-delete/{id}', [PermissionController::class, 'destroy'])
 Route::get('/edit-role/{id}', [RoleController::class, 'edit'])->name('edit_role');
 Route::post('/edit-role/{id}', [RoleController::class, 'update']);
 Route::post('/role-delete/{id}', [RoleController::class, 'destroy'])->name('delete_role');
+
+Route::post('/product/{id}', [ProductController::class, 'store'])->name('products_store');
+
+Route::get('/checkout', [PageController::class, 'checkout']);
+Route::get('/user/{id}', [UserController::class, 'show'])->name('show_user');

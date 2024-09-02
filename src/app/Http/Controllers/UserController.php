@@ -55,4 +55,26 @@ class UserController extends Controller
         return redirect()->route('dashboard')->with('success', 'User deleted successfully.');
     }
 
+    public function show($id){
+        $user = User::find($id);
+        return view("show_user", ["user" => $user]);
+
+        
+    }
+
+    public function saveImage(Request $request){
+    
+            $request->validate([
+                'imageUrl' => 'required|file|mimes:jpeg,png,jpg|max:2048',
+            ]);
+    
+            $file = $request->file('imageUrl');
+            $originalName = $file->getClientOriginalName();
+            $product = User::find($id);
+            $product->image = $originalName;
+            $product->save();
+            $request->imageUrl->move(public_path('images'), $originalName);
+    
+            return redirect()->back()->with('success', 'File uploaded successfully!'); 
+    }
 }

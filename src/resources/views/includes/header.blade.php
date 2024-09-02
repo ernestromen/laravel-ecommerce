@@ -11,7 +11,7 @@
    <meta name="description" content="">
    <meta name="author" content="">
    <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
-   <link rel="stylesheet" href="{{asset('css/style.css?v=1a20')}}">
+   <link rel="stylesheet" href="{{asset('css/style.css?v=1a220')}}">
    <link rel="stylesheet" href="{{asset('css/responsive.css?v=1a03')}}">
    <link rel="icon" href="images/fevicon.png" type="image/gif" />
    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
@@ -57,7 +57,7 @@
                   <div class="collapse navbar-collapse" id="navbarsExample04">
                      <ul class="navbar-nav d-block mr-auto nav-list-modification m-auto">
                         <li class="nav-item ">
-                           <a class="nav-link" href="index.html">Home</a>
+                           <a class="nav-link" href="{{route('home')}}">Home</a>
                         </li>
                         <li class="nav-item">
                            <a class="nav-link" href="{{route('categories')}}">Categories</a>
@@ -65,22 +65,27 @@
                         <li class="nav-item">
                            <a class="nav-link" href="{{route('products')}}">Products</a>
                         </li>
+                        @role('admin')
                         <li class="nav-item">
                            <a class="nav-link" href="{{route('leads')}}">Leads</a>
                         </li>
-                        <li class="nav-item">
-                           <a class="nav-link" href="contact.html">Contact Us</a>
-                        </li>
+                        @endrole
                      </ul>
                   </div>
                </nav>
             </div>
 
             <div class="col-md-2 pt-3">
+               @if(!Auth::check())
                <a href="{{ route('login') }}" title="login user"><i class=" pr-3 fa fa-sign-in"
-                     aria-hidden="true"></i></a>
+                   aria-hidden="true"></i></a>
+            @else
+               <i class="fa fa-shopping-cart pr-5" aria-hidden="true"></i>
+            @endif
                @if ($currentUser !== null && $currentUser !== '')
-               <a class="pr-4 " href="Javascript:void(0)"> {{$currentUser}}</a>
+               <a class="pr-4 "
+                 href="{{$currentUser->name == 'Admin' ? route('dashboard') : route('show_user', ['id' => $currentUser->id])}}">
+                 {{$currentUser->name}}</a>
                <a href="{{ route('logout') }}">Logout</a>
             @else
                <a href="{{ route('register') }}" title="register user"><i class="fa fa-user pr-5"

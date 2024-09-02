@@ -19,9 +19,21 @@ class ProductController extends Controller
         //
     }
 
-    public function store(Request $request)
+    public function store(Request $request, string $id)
     {
-        //
+
+        $request->validate([
+            'imageUrl' => 'required|file|mimes:jpeg,png,jpg|max:2048',
+        ]);
+
+        $file = $request->file('imageUrl');
+        $originalName = $file->getClientOriginalName();
+        $product = Product::find($id);
+        $product->image = $originalName;
+        $product->save();
+        $request->imageUrl->move(public_path('images'), $originalName);
+
+        return redirect()->back()->with('success', 'File uploaded successfully!');
     }
 
     public function show(string $id)

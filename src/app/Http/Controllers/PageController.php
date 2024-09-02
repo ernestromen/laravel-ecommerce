@@ -9,40 +9,34 @@ use App\Models\Role;
 use App\Models\Permission;
 use App\Models\Category;
 use App\Models\Product;
-use League\Csv\Writer;
-use Response;
 use Illuminate\Support\Facades\Schema;
 use App\Events\testEvent;
 use Illuminate\Support\Facades\Log;
+use App\Services\DownloadTableData;
 
 class PageController extends Controller
 {
     protected $downloadTableData;
 
-    public function __construct(testEvent $testEvent)
+    public function __construct(testEvent $testEvent, DownloadTableData $downloadTableData)
     {
         $this->testEvent = $testEvent;
+        $this->downloadTableData = $downloadTableData;
     }
 
     public function index()
     {
-        $currentUser = Auth::user() ? Auth::user()->name : "";
-        $userName = Auth::user() ? Auth::user()->name : '';
-        return view("index", ["userName" => $userName, "currentUser" => $currentUser]);
+        return view("index");
     }
 
     public function register()
     {
-        $currentUser = Auth::user() ? Auth::user()->name : "";
-        $user = Auth::user() ? Auth::user()->name : "";
-        return view("register", ["user" => $user, "currentUser" => $currentUser]);
+        return view("register");
     }
 
     public function login()
     {
-        $currentUser = Auth::user() ? Auth::user()->name : "";
-        $user = Auth::user() ? Auth::user()->name : "";
-        return view("login", ["user" => $user, "currentUser" => $currentUser]);
+        return view("login");
     }
 
 
@@ -70,49 +64,47 @@ class PageController extends Controller
 
     public function dashboard()
     {
-        $currentUser = Auth::user() ? Auth::user()->name : "";
         $users = User::all();
         $roles = Role::all();
         $permissions = Permission::all();
 
-        return view("dashboard", ["currentUser" => $currentUser, 'users' => $users, 'roles' => $roles, 'permissions' => $permissions]);
+        return view("dashboard", ['users' => $users, 'roles' => $roles, 'permissions' => $permissions]);
     }
 
     public function products()
     {
-        $currentUser = Auth::user() ? Auth::user()->name : "";
-
         $products = Product::all();
-        return view("products", ["products" => $products, "currentUser" => $currentUser]);
+        return view("products", ["products" => $products]);
     }
 
     public function product($id)
     {
         $currentProduct = Product::find($id);
         $currentProductCategory = $currentProduct->category;
-        $currentUser = Auth::user() ? Auth::user()->name : "";
-
-        return view("product", ["id" => $id, "currentUser" => $currentUser, 'currentProduct' => $currentProduct, 'currentProductCategory' => $currentProductCategory]);
+        return view("product", ["id" => $id, 'currentProduct' => $currentProduct, 'currentProductCategory' => $currentProductCategory]);
     }
 
 
     public function category($id)
     {
-        $currentUser = Auth::user() ? Auth::user()->name : "";
         $currentCategory = Category::find($id);
 
-        return view("category", ["id" => $id, "currentUser" => $currentUser, 'currentCategory' => $currentCategory]);
+        return view("category", ["id" => $id, 'currentCategory' => $currentCategory]);
     }
 
     public function categories()
     {
-        $currentUser = Auth::user() ? Auth::user()->name : "";
         $categories = Category::all();
-        return view("categories", ["categories" => $categories, "currentUser" => $currentUser]);
+        return view("categories", ["categories" => $categories]);
     }
 
     public function downloadCsv($entityName)
     {
         return $this->downloadTableData->execute($entityName);
+    }
+
+    public function checkout()
+    {
+        return view("checkout");
     }
 }
