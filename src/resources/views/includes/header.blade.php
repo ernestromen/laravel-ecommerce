@@ -80,7 +80,10 @@
                <a href="{{ route('login') }}" title="login user"><i class=" pr-3 fa fa-sign-in"
                    aria-hidden="true"></i></a>
             @else
-               <i class="fa fa-shopping-cart pr-5" aria-hidden="true"></i>
+               <a href="{{ route('show_cart', ["id" => $currentUser->id]) }}" title="login user">
+                 <i class="fa fa-shopping-cart pr-5" aria-hidden="true"></i>
+
+               </a>
             @endif
                @if ($currentUser !== null && $currentUser !== '')
                <a class="pr-4 "

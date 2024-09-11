@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Product;
+use App\Models\Cart;
 
 class ProductController extends Controller
 {
@@ -65,5 +66,13 @@ class ProductController extends Controller
     {
         Product::destroy($id);
         return redirect('/products');
+    }
+
+    public function addToCart($productId)
+    {
+        $product = Product::find($productId);
+        $currentUserId = Auth::user()->id;
+        $cart = Cart::where('user_id', '=', $currentUserId)->first();
+        $cart->products()->attach($product, ['quantity' => 2]);
     }
 }

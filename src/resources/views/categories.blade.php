@@ -25,7 +25,11 @@
                     @foreach ($categories as $category)
                         <tr class="text-center">
                             <th scope="row">{{$category->id}}</th>
-                            <td>{{$category->name}}</td>
+                            <td>
+                                <a href="{{route('category', ["id" => $category->id])}}">
+                                    {{$category->name}}
+                                </a>
+                            </td>
                             <td>{{$category->description}}</td>
                             <td>{{$category->created_at}}</td>
                             <td>{{$category->updated_at}}</td>

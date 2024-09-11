@@ -20,8 +20,8 @@ return new class extends Migration {
             $table->integer('quantity')->default(0);
             $table->decimal('weight', 8, 2)->nullable();
             $table->string('image')->nullable();
-            // $table->foreignId('category_id')->nullable()->constrained(); // Assuming you have a categories table
-            $table->foreignIdFor(Category::class)->constrained()->cascadeOnDelete();
+            $table->foreignId('category_id')->nullable()->constrained();
+            // $table->foreignIdFor(Category::class)->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }

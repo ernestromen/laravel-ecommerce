@@ -12,7 +12,6 @@ class Category extends Model
     use SoftDeletes;
     public function products()
     {
-        return $this->belongsToMany(Product::class, 'products_categories');
 
-    }
+        return $this->hasMany(Product::class, 'category_id');    }
 }

@@ -9,6 +9,7 @@ use App\Models\Role;
 use App\Models\Permission;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Cart;
 use Illuminate\Support\Facades\Schema;
 use App\Events\testEvent;
 use Illuminate\Support\Facades\Log;
@@ -81,21 +82,8 @@ class PageController extends Controller
     {
         $currentProduct = Product::find($id);
         $currentProductCategory = $currentProduct->category;
+        
         return view("product", ["id" => $id, 'currentProduct' => $currentProduct, 'currentProductCategory' => $currentProductCategory]);
-    }
-
-
-    public function category($id)
-    {
-        $currentCategory = Category::find($id);
-
-        return view("category", ["id" => $id, 'currentCategory' => $currentCategory]);
-    }
-
-    public function categories()
-    {
-        $categories = Category::all();
-        return view("categories", ["categories" => $categories]);
     }
 
     public function downloadCsv($entityName)
@@ -106,5 +94,26 @@ class PageController extends Controller
     public function checkout()
     {
         return view("checkout");
+    }
+
+    public function showCart($id)
+    {
+        $user = User::find($id);
+        $cart = Cart::where('user_id', '=', $id)->first();
+
+        $cartProducts = $cart->products()->get();
+
+
+        return view("show_cart", ["cartProducts" => $cartProducts]);
+    }
+
+    public function deleteCartItem($id)
+    {
+
+        $cart = Cart::where('user_id', '=', Auth::user()->id)->first();
+
+        $cart->products()->detach($id);
+
+        return redirect('/categories');
     }
 }

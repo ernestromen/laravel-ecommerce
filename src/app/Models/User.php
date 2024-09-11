@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable
 {
-    use  HasFactory, Notifiable,HasPermissionsTrait,SoftDeletes;
+    use HasFactory, Notifiable, HasPermissionsTrait, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -41,7 +41,7 @@ class User extends Authenticatable
     }
     public function roles()
     {
-        return $this->belongsToMany(Role::class,'users_roles','user_id','role_id');
+        return $this->belongsToMany(Role::class, 'users_roles', 'user_id', 'role_id');
     }
     public function hasRole($role)
     {

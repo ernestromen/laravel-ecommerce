@@ -40,9 +40,9 @@ Route::get('/products', [PageController::class, 'products'])->name('products');
 
 Route::get('/product/{id}', [PageController::class, 'product'])->name('product');
 
-Route::get('/category/{id}', [PageController::class, 'category'])->name('category');
+Route::get('/category/{id}', [CategoryController::class, 'show'])->name('category');
 
-Route::get('/categories', [PageController::class, 'categories'])->name('categories');
+Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
 
 Route::post('/download-csv/{entityName}', [PageController::class, 'downloadCsv'])->name('download_csv');
 
@@ -71,3 +71,8 @@ Route::post('/product/{id}', [ProductController::class, 'store'])->name('product
 
 Route::get('/checkout', [PageController::class, 'checkout']);
 Route::get('/user/{id}', [UserController::class, 'show'])->name('show_user');
+
+Route::get('/cart/{id}', [PageController::class, 'showCart'])->name('show_cart');
+Route::post('/product/{id}', [ProductController::class, 'addToCart'])->name('add_to_cart');
+Route::post('/cart/{id}', [PageController::class, 'deleteCartItem'])->name('delete_cart_item');
+

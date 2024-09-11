@@ -11,7 +11,8 @@ class CategoryController extends Controller
 
     public function index()
     {
-        //
+        $categories = Category::all();
+        return view("categories", ["categories" => $categories]);
     }
 
     public function create()
@@ -26,7 +27,10 @@ class CategoryController extends Controller
 
     public function show(string $id)
     {
-        //
+        $categories = Category::all();
+        $currentCategory = Category::find($id);
+
+        return view("category", ["id" => $id, 'currentCategory' => $currentCategory, 'categories' => $categories]);
     }
 
     public function edit(string $id)

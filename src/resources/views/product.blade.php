@@ -6,7 +6,6 @@
         height: auto;
     }
 </style>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-6">
@@ -52,14 +51,38 @@
             <p><strong>{{$currentProduct->price}}$</strong></p>
             <div class="mb-3">
                 <label for="quantity">Quantity:</label>
-                <input type="number" id="quantity" name="quantity" min="1" value="1" class="form-control"
+                <input type="number" id="quantity" name="qantity" min="1" value="1" class="form-control"
                     style="width: 100px;">
             </div>
-            <button type="button" class="btn btn-primary">Add to Cart</button>
+            <form id="idForm" action="{{ route('add_to_cart', ["id" => $currentProduct->id]) }}" method="post">
+                @csrf
+                <input type="submit" class="btn btn-primary" value="Add to Cart" />
+
+            </form>
         </div>
     </div>
 </div>
-<!-- Bootstrap JS and dependencies (jQuery, Popper.js) -->
+
+<script>
+    //For future build of cart ajax function
+    // $("#idForm").submit(function (e) {
+
+    // e.preventDefault(); // avoid to execute the actual submit of the form.
+    // console.log('here');
+    // var form = $(this);
+    // var actionUrl = form.attr('action');
+
+    // $.ajax({
+    //     type: "POST",
+    //     url: actionUrl,
+    //     data: form.serialize(), // serializes the form's elements.
+    //     success: function (data) {
+    //         alert(data); // show response from the php script.
+    //     }
+    // });
+
+    // });
+</script>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
