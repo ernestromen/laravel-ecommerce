@@ -8,71 +8,79 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
-use App\Http\Middleware\AdminAuthorization;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckOutController;
+use App\Http\Middleware\{
+    AdminAuthorization,
+    CartUserVisibility,
+    EntranceToRegisteredUsers
+};
 use App\Http\Middleware\ShareAuthenticatedUser;
 use App\Mail\leadAcquired;
+
+Route::view('/', 'index')->name('home');
+Route::view('/about', 'about');
+
+Route::post('/download-csv/{entityName}', [PageController::class, 'downloadCsv'])->name('download_csv');
 
 Route::middleware(AdminAuthorization::class)->group(function () {
     Route::get('/leads', [LeadController::class, 'index'])->name('leads');
     Route::get('/dashboard', [PageController::class, 'dashboard'])->name('dashboard');
 });
+Route::controller(UserController::class)->group(function () {
+    Route::get('/login', 'login')->name('login');
+    Route::post('/login', 'loginUser');
+    Route::post('/register', 'addUser');
+    Route::get('/register', 'register')->name('register');
+    Route::get('/logout', 'logout')->name('logout');
+    Route::post('/dashboard/{id}', 'destroy')->name('delete_user');
+    Route::get('/user/{id}', 'show')->name('show_user');
+    Route::get('/edit-user/{id}', 'edit')->name('edit_user');
+    Route::post('/edit-user/{id}', 'update');
+});
 
-Route::get('/', [PageController::class, 'index'])->name('home');
-Route::post('/save-lead', [LeadController::class, 'store'])->name('save_lead');
-Route::post('/lead-delete/{id}', [LeadController::class, 'destroy'])->name('delete_lead');
-Route::get('/lead/{id}', [LeadController::class, 'edit'])->name('edit_lead');
-Route::post('/lead/{id}', [LeadController::class, 'update']);
+Route::controller(PermissionController::class)->group(function () {
+    Route::get('/edit-permission/{id}', 'edit')->name('edit_permission');
+    Route::post('/edit-permission/{id}', 'update');
+    Route::post('/permission-delete/{id}', 'destroy')->name('delete_permission');
+});
 
-Route::view('/about', 'about');
+Route::controller(RoleController::class)->group(function () {
+    Route::get('/edit-role/{id}', 'edit')->name('edit_role');
+    Route::post('/edit-role/{id}', 'update');
+    Route::post('/role-delete/{id}', 'destroy')->name('delete_role');
+});
 
-Route::get('/login', [PageController::class, 'login'])->name('login');
-Route::post('/login', [PageController::class, 'loginUser']);
+Route::controller(ProductController::class)->group(function () {
+    Route::get('/products', 'products')->name('products');
+    Route::get('/product/{id}', 'product')->name('product');
+    Route::post('/product/{id}', 'store')->name('products_store');
+    Route::get('/edit-product/{id}', 'edit')->name('edit_product');
+    Route::post('/edit-product/{id}', 'update');
+    Route::post('/products/{id}', 'destroy')->name('delete_product');
+    Route::post('/product/{id}/add-to-cart', 'addProductToCart')->name('add_to_cart');
+});
 
-Route::get('/register', [PageController::class, 'register'])->name('register');
+Route::controller(CategoryController::class)->group(function () {
+    Route::get('/edit-category/{id}', 'edit')->name('edit_category');
+    Route::post('/edit-category/{id}', 'update');
+    Route::post('/categories/{id}', 'destroy')->name('delete_category');
+    Route::get('/category/{id}', 'show')->name('category');
+    Route::get('/categories', 'index')->name('categories');
+});
 
-Route::get('/logout', [PageController::class, 'logout'])->name('logout');
+Route::controller(CartController::class)->group(function () {
+    Route::get('/cart/{id}', 'showCart')->middleware(CartUserVisibility::class)->name('show_cart');
+    Route::post('/cart/{id}', 'deleteCartItem')->name('delete_cart_item');
+});
 
-Route::post('/register', [UserController::class, 'addUser']);
+Route::controller(CheckOutController::class)->group(function () {
+    Route::get('/checkout', 'checkout')->middleware(EntranceToRegisteredUsers::class);
+});
 
-Route::post('/dashboard/{id}', [UserController::class, 'destroy'])->name('delete_user');
-
-Route::get('/products', [PageController::class, 'products'])->name('products');
-
-Route::get('/product/{id}', [PageController::class, 'product'])->name('product');
-
-Route::get('/category/{id}', [CategoryController::class, 'show'])->name('category');
-
-Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
-
-Route::post('/download-csv/{entityName}', [PageController::class, 'downloadCsv'])->name('download_csv');
-
-Route::get('/edit-product/{id}', [ProductController::class, 'edit'])->name('edit_product');
-Route::get('/edit-category/{id}', [CategoryController::class, 'edit'])->name('edit_category');
-
-Route::post('/edit-product/{id}', [ProductController::class, 'update']);
-Route::post('/edit-category/{id}', [CategoryController::class, 'update']);
-
-Route::post('/products/{id}', [ProductController::class, 'destroy'])->name('delete_product');
-Route::post('/categories/{id}', [CategoryController::class, 'destroy'])->name('delete_category');
-
-Route::get('/edit-user/{id}', [UserController::class, 'edit'])->name('edit_user');
-Route::post('/edit-user/{id}', [UserController::class, 'update']);
-Route::post('/permission-delete/{id}', [UserController::class, 'destroy'])->name('delete_permission');
-
-Route::get('/edit-permission/{id}', [PermissionController::class, 'edit'])->name('edit_permission');
-Route::post('/edit-permission/{id}', [PermissionController::class, 'update']);
-Route::post('/permission-delete/{id}', [PermissionController::class, 'destroy'])->name('delete_permission');
-
-Route::get('/edit-role/{id}', [RoleController::class, 'edit'])->name('edit_role');
-Route::post('/edit-role/{id}', [RoleController::class, 'update']);
-Route::post('/role-delete/{id}', [RoleController::class, 'destroy'])->name('delete_role');
-
-Route::post('/product/{id}', [ProductController::class, 'store'])->name('products_store');
-
-Route::get('/checkout', [PageController::class, 'checkout']);
-Route::get('/user/{id}', [UserController::class, 'show'])->name('show_user');
-
-Route::get('/cart/{id}', [PageController::class, 'showCart'])->name('show_cart');
-Route::post('/product/{id}', [ProductController::class, 'addToCart'])->name('add_to_cart');
-Route::post('/cart/{id}', [PageController::class, 'deleteCartItem'])->name('delete_cart_item');
-
+Route::controller(LeadController::class)->group(function () {
+    Route::post('/save-lead', 'store')->name('save_lead');
+    Route::post('/lead-delete/{id}', 'destroy')->name('delete_lead');
+    Route::get('/lead/{id}', 'edit')->name('edit_lead');
+    Route::post('/lead/{id}', 'update');
+});

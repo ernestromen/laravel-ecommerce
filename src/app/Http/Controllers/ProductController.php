@@ -10,9 +10,17 @@ use App\Models\Cart;
 class ProductController extends Controller
 {
 
-    public function index()
+    public function product($id)
     {
-        //
+        $currentProduct = Product::find($id);
+        $currentProductCategory = $currentProduct->category;
+
+        return view("product", ["id" => $id, 'currentProduct' => $currentProduct, 'currentProductCategory' => $currentProductCategory]);
+    }
+
+    public function products()
+    {
+        return view("products", ["products" => Product::all()]);
     }
 
     public function create()
@@ -65,14 +73,16 @@ class ProductController extends Controller
     public function destroy(string $id)
     {
         Product::destroy($id);
-        return redirect('/products');
+        return redirect()->back();
     }
 
-    public function addToCart($productId)
+    public function addProductToCart($productId)
     {
         $product = Product::find($productId);
         $currentUserId = Auth::user()->id;
         $cart = Cart::where('user_id', '=', $currentUserId)->first();
         $cart->products()->attach($product, ['quantity' => 2]);
+
+        return redirect()->back();
     }
 }
