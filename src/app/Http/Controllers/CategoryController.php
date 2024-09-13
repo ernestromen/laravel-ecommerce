@@ -35,9 +35,8 @@ class CategoryController extends Controller
 
     public function edit(string $id)
     {
-        $currentUser = Auth::user() ? Auth::user()->name : "";
         $category = Category::find($id);
-        return view("edit_category", ["currentUser" => $currentUser, "category" => $category]);
+        return view("edit_category", ["category" => $category]);
     }
 
     public function update(Request $request, string $id)

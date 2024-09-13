@@ -52,9 +52,8 @@ class ProductController extends Controller
 
     public function edit(string $id)
     {
-        $currentUser = Auth::user() ? Auth::user()->name : "";
         $product = Product::find($id);
-        return view("edit_product", ["currentUser" => $currentUser, "product" => $product]);
+        return view("edit_product", ["product" => $product]);
     }
 
     public function update(Request $request, string $id)
@@ -79,8 +78,7 @@ class ProductController extends Controller
     public function addProductToCart($productId)
     {
         $product = Product::find($productId);
-        $currentUserId = Auth::user()->id;
-        $cart = Cart::where('user_id', '=', $currentUserId)->first();
+        $cart = Cart::where('user_id', '=', Auth::id())->first();
         $cart->products()->attach($product, ['quantity' => 2]);
 
         return redirect()->back();

@@ -31,9 +31,8 @@ class PermissionController extends Controller
 
     public function edit(string $id)
     {
-        $currentUser = Auth::user() ? Auth::user()->name : "";
         $permission = Permission::find($id);
-        return view("edit_permission", ["currentUser" => $currentUser, "permission" => $permission]);
+        return view("edit_permission", ["permission" => $permission]);
     }
 
     public function update(Request $request, string $id)

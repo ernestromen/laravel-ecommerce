@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use App\Models\Lead;
 use App\Events\testEvent;
 use App\Models\Product;
@@ -12,14 +11,13 @@ class LeadController extends Controller
 {
     public function index()
     {
-        $currentUser = Auth::user() ? Auth::user()->name : "";
-
         $leads = Lead::all();
 
-        return view("leads", ["currentUser" => $currentUser, 'leads' => $leads]);
+        return view("leads", ['leads' => $leads]);
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
 
         $lead = new Lead();
         $lead->firstname = $request->firstname;
@@ -36,9 +34,8 @@ class LeadController extends Controller
 
     public function edit($id)
     {
-        $currentUser = Auth::user() ? Auth::user()->name : "";
         $lead = Lead::find($id);
-        return view("edit_lead", ["currentUser" => $currentUser, "lead" => $lead]);
+        return view("edit_lead", ["lead" => $lead]);
 
     }
     public function update(Request $request, string $id)

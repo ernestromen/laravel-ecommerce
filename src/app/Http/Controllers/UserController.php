@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use App\Events\cartCreated;
 
 class UserController extends Controller
 {
@@ -55,6 +56,7 @@ class UserController extends Controller
         $user->password = bcrypt($request->password);
         $user->setRememberToken(Str::random(10));
         $user->save();
+        event(new cartCreated($user));
         //attach the role_id that is needed 2 or 1 for admin
         $user->roles()->attach('2');
         Auth::login($user);
@@ -63,9 +65,8 @@ class UserController extends Controller
 
     public function edit(string $id)
     {
-        $currentUser = Auth::user() ? Auth::user()->name : "";
         $user = User::find($id);
-        return view("edit_user", ["currentUser" => $currentUser, "user" => $user]);
+        return view("edit_user", ["user" => $user]);
     }
 
     public function update(Request $request, string $id)

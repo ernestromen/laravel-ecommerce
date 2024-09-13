@@ -80,15 +80,15 @@
                <a href="{{ route('login') }}" title="login user"><i class=" pr-3 fa fa-sign-in"
                    aria-hidden="true"></i></a>
             @else
-               <a href="{{ route('show_cart', ["id" => $currentUser->id]) }}" title="login user">
+               <a href="{{ route('show_cart', ["id" => Auth::id()]) }}" title="login user">
                  <i class="fa fa-shopping-cart pr-5" aria-hidden="true"></i>
 
                </a>
             @endif
-               @if ($currentUser !== null && $currentUser !== '')
+               @if (Auth::user() !== null && Auth::user() !== '')
                <a class="pr-4 "
-                 href="{{$currentUser->name == 'Admin' ? route('dashboard') : route('show_user', ['id' => $currentUser->id])}}">
-                 {{$currentUser->name}}</a>
+                 href="{{Auth::user()->name == 'Admin' ? route('dashboard') : route('show_user', ['id' => Auth::id()])}}">
+                 {{Auth::user()->name}}</a>
                <a href="{{ route('logout') }}">Logout</a>
             @else
                <a href="{{ route('register') }}" title="register user"><i class="fa fa-user pr-5"

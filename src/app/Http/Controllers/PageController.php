@@ -10,14 +10,6 @@ use App\Services\DownloadTableData;
 
 class PageController extends Controller
 {
-    protected $downloadTableData;
-
-    public function __construct(testEvent $testEvent, DownloadTableData $downloadTableData)
-    {
-        $this->testEvent = $testEvent;
-        $this->downloadTableData = $downloadTableData;
-    }
-
     public function dashboard()
     {
         $users = User::all();
@@ -29,6 +21,6 @@ class PageController extends Controller
 
     public function downloadCsv($entityName)
     {
-        return $this->downloadTableData->execute($entityName);
+        return DownloadTableData::execute($entityName);
     }
 }

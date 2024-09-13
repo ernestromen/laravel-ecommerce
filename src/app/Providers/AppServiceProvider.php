@@ -8,6 +8,7 @@ use Illuminate\Support\ServiceProvider;
 use App\Services\DownloadTableData;
 use App\Events\testEvent;
 use App\Listeners\SendDownloadNotification;
+use App\Listeners\StartCartListener;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
@@ -21,9 +22,6 @@ class AppServiceProvider extends ServiceProvider
             return new DownloadTableData();
         });
 
-        View::composer('*', function ($view) {
-            $view->with('currentUser', Auth::user());
-        });
         Event::listen(
             SendDownloadNotification::class,
         );
@@ -37,6 +35,10 @@ class AppServiceProvider extends ServiceProvider
     {
         Event::listen(
             SendDownloadNotification::class,
+        );
+
+        Event::listen(
+            StartCartListener::class,
         );
         try {
             Permission::get()->map(function ($permission) {

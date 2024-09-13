@@ -22,9 +22,8 @@ class RoleController extends Controller
 
     public function edit(string $id)
     {
-        $currentUser = Auth::user() ? Auth::user()->name : "";
         $role = Role::find($id);
-        return view("edit_role", ["currentUser" => $currentUser, "role" => $role]);
+        return view("edit_role", ["role" => $role]);
     }
 
     public function update(Request $request, string $id)

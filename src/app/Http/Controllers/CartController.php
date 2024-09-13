@@ -20,7 +20,7 @@ class CartController extends Controller
 
     public function deleteCartItem($id)
     {
-        $cart = Cart::where('user_id', '=', Auth::user()->id)->first();
+        $cart = Cart::where('user_id', '=', Auth::id())->first();
         $cart->products()->detach($id);
 
         return redirect()->back();

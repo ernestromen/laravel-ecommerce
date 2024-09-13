@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Schema;
 
 class DownloadTableData
 {
-    public function execute($entityName)
+    static public function execute($entityName)
     {
         $modelPath = 'App\Models\\';
         $finalModelPath = $modelPath . $entityName;
