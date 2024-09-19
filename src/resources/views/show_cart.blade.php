@@ -1,12 +1,5 @@
 @include('includes.header')
 <style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f4f4;
-        margin: 0;
-        padding: 0;
-    }
-
     .cart-container {
         max-width: 800px;
         margin: 20px auto;
@@ -82,40 +75,101 @@
     }
 </style>
 <div class="cart-container">
-    <header class="cart-header">
+    <div class="cart-header">
         <h1>Shopping Cart</h1>
-    </header>
-    <main class="cart-main">
-        <table class="cart-table">
-            <thead>
-                <tr>
-                    <th>Product</th>
-                    <th>Price</th>
-                    <th>Quantity</th>
-                    <th>Total</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($cartProducts as $product)
-                    <tr>
-                        <td>{{$product->name}}</td>
-                        <td>{{$product->price}}</td>
-                        <td><input type="number" value="1" min="1"></td>
-                        <td>$10.00</td>
-                        <td>
-                            <form action={{route('delete_cart_item', ['id' => $product->id])}} method="post" class="m-auto">
-                                {{csrf_field()}}
-                                <button class="btn btn-danger rounded-circle mb-2">
-                                    <i class="fa fa-trash-o fa-lg" aria-hidden="true" title="delete model">
+    </div>
 
-                                    </i></button>
-                            </form>
-                        </td>
+    @if($cartProducts->count() > 0)
+        <main class="cart-main">
+            <table class="cart-table">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                        <th>Action</th>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </main>
-    @include('includes.footer')
+                </thead>
+                <tbody>
+                    @foreach($cartProducts as $product)
+                        <tr>
+                            <td><a href={{route('product', ["id" => $product->id])}}>{{$product->name}}</a></td>
+                            <td>{{$product->price}}</td>
+                            <td>
+                                <form action="{{route('change_quantity', ["id" => $product->id])}}" method="POST">
+                                    {{csrf_field()}}
+
+                                    <input name="quantity_input" id="quantity-input" type="number"
+                                        value="{{$product->pivot->quantity}}" min="1">
+                                </form>
+                            </td>
+                            <td>$10.00</td>
+                            <td>
+                                <form action={{route('delete_cart_item', ['id' => $product->id])}} method="post" class="m-auto">
+                                    {{csrf_field()}}
+                                    <button class="btn btn-danger rounded-circle mb-2">
+                                        <i class="fa fa-trash-o fa-lg" aria-hidden="true" title="delete model">
+
+                                        </i></button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </main>
+    @else
+        <div class="mt-3 text-center">
+            <span>shopping cart is currentlhy empty</span>
+        </div>
+    @endif
+</div>
+<div id="result"></div>
+<script>
+    $(document).ready(function () {
+        @if($cartProducts->count() > 0)
+
+                $("#quantity-input").on("focusout", function () {
+                    console.log('focus');
+                    console.log($(this).val());
+                    actionTaken = $(this).val() > value ? 'inc' : 'dec';
+                    focusValue = $(this).val();
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': "{{ csrf_token() }}",
+                        },
+                        type: "POST",
+                        url: "{{ route('change_quantity', ["id" => $product->id]) }}",
+                        data: { actionTaken, focusValue },
+                        success: function (data) {
+                            console.log(data);
+                        },
+                    });
+
+                });
+
+                let value = $('#quantity-input').val();
+                $('#quantity-                    // console.log($(this).val());
+                    input').on('change', function () {
+                                        actionTaken = $(this).val() > value ? 'inc' : 'dec';
+                value = $(this).val();
+
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': "{{ csrf_token() }}",
+                    },
+                    type: "POST",
+                    url: "{{ route('change_quantity', ["id" => $product->id]) }}",
+                    data: { actionTaken },
+                    success: function (data) {
+                        console.log(data);
+                    },
+                });
+            });
+
+                                });
+        @endif
+</script>
+@include('includes.footer')
 

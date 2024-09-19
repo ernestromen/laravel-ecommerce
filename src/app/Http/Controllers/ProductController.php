@@ -79,8 +79,20 @@ class ProductController extends Controller
     {
         $product = Product::find($productId);
         $cart = Cart::where('user_id', '=', Auth::id())->first();
-        $cart->products()->attach($product, ['quantity' => 2]);
+        $hasProduct = $cart->products()->where('product_id', $productId)->exists();
 
+        if ($hasProduct) {
+            foreach ($cart->products as $cartItem) {
+
+                if ($cartItem->id == (int) $productId) {
+                    $currentQuantity = $cartItem->pivot->quantity;
+                    $newQuantity = ++$currentQuantity;
+                    $cart->products()->updateExistingPivot($cartItem, ['quantity' => $newQuantity]);
+                }
+            }
+        } else {
+            $cart->products()->attach($product->id, ['quantity' => 1]);
+        }
         return redirect()->back();
     }
 }

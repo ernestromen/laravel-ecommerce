@@ -51,10 +51,10 @@
             <p><strong>{{$currentProduct->price}}$</strong></p>
             <div class="mb-3">
                 <label for="quantity">Quantity:</label>
-                <input {{auth()->user()->name == 'Admin' ? 'readonly' : ''}} type="number" id="quantity" name="quantity"
+                <input {{auth()->user() && auth()->user()->name == 'Admin' ? 'readonly' : ''}} type="number" id="quantity" name="quantity"
                     min="1" value="1" class="form-control" style="width: 100px;">
             </div>
-            @if(auth()->user()->name != 'Admin')
+            @if(auth()->user() && auth()->user()->name != 'Admin')
                 <form id="idForm" action="{{ route('add_to_cart', ["id" => $currentProduct->id]) }}" method="post">
                     @csrf
                     <input type="submit" class="btn btn-primary" value="Add to Cart" />

@@ -72,10 +72,11 @@ Route::controller(CategoryController::class)->group(function () {
 Route::controller(CartController::class)->group(function () {
     Route::get('/cart/{id}', 'showCart')->middleware(CartUserVisibility::class)->name('show_cart');
     Route::post('/cart/{id}', 'deleteCartItem')->name('delete_cart_item');
+    Route::post('/cart/{id}/change-quantity', 'changeQuantityOfProduct')->name('change_quantity');
 });
 
 Route::controller(CheckOutController::class)->group(function () {
-    Route::get('/checkout', 'checkout')->middleware(EntranceToRegisteredUsers::class);
+    Route::get('/checkout/{id}', 'checkout')->middleware(EntranceToRegisteredUsers::class);
 });
 
 Route::controller(LeadController::class)->group(function () {

@@ -25,4 +25,44 @@ class CartController extends Controller
 
         return redirect()->back();
     }
+
+    public function changeQuantityOfProduct($productId, Request $request)
+    {
+        $cart = Cart::where('user_id', '=', Auth::id())->first();
+
+        if (!is_null($request->focusValue)) {
+            foreach ($cart->products as $cartItem) {
+
+                if ($cartItem->id == (int) $productId) {
+                    $currentQuantity = $cartItem->pivot->quantity;
+                    // $newQuantity = ++$currentQuantity;
+                    $cart->products()->updateExistingPivot($cartItem, ['quantity' => (int) $request->focusValue]);
+                }
+            }
+            return 'check DB';
+        }
+        if ($request->actionTaken == 'inc') {
+
+            foreach ($cart->products as $cartItem) {
+
+                if ($cartItem->id == (int) $productId) {
+                    $currentQuantity = $cartItem->pivot->quantity;
+                    $newQuantity = ++$currentQuantity;
+                    $cart->products()->updateExistingPivot($cartItem, ['quantity' => $newQuantity]);
+                }
+            }
+        } else {
+            foreach ($cart->products as $cartItem) {
+
+                if ($cartItem->id == (int) $productId) {
+                    $currentQuantity = $cartItem->pivot->quantity;
+                    $newQuantity = --$currentQuantity;
+                    $cart->products()->updateExistingPivot($cartItem, ['quantity' => $newQuantity]);
+                }
+            }
+
+        }
+
+        return 'check database!';
+    }
 }
