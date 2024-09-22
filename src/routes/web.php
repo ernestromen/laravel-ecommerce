@@ -76,7 +76,7 @@ Route::controller(CartController::class)->group(function () {
 });
 
 Route::controller(CheckOutController::class)->group(function () {
-    Route::get('/checkout/{id}', 'checkout')->middleware(EntranceToRegisteredUsers::class);
+    Route::get('/checkout/{id}', 'checkout')->middleware(EntranceToRegisteredUsers::class)->name('checkout');
 });
 
 Route::controller(LeadController::class)->group(function () {

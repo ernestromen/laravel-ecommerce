@@ -81,8 +81,8 @@
                    aria-hidden="true"></i></a>
             @else
                <a href="{{ route('show_cart', ["id" => Auth::id()]) }}" title="login user">
-                 <i class="fa fa-shopping-cart pr-5" aria-hidden="true"></i>
-
+               <span class='badge badge-secondary' id='lblCartCount'>5</span>  
+               <i class="fa fa-shopping-cart pr-5" aria-hidden="true"></i>
                </a>
             @endif
                @if (Auth::user() !== null && Auth::user() !== '')

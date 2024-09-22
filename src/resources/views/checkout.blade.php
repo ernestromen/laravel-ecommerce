@@ -3,6 +3,8 @@
 <style>
     main {
         padding: 20px;
+        display: flex;
+        justify-content: center;
     }
 
     .checkout-container {
@@ -14,8 +16,13 @@
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
 
-    form h2 {
-        margin-top: 0;
+    .summary-container {
+        max-width: 300px; /* Adjust width as needed */
+        background: #f9f9f9;
+        border: 1px solid #ddd;
+        padding: 20px;
+        border-radius: 8px;
+        margin-left: 20px; /* Space between form and summary */
     }
 
     .form-group {
@@ -48,8 +55,19 @@
     button:hover {
         background-color: #218838;
     }
+
+    .summary-title {
+        margin-bottom: 15px;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .summary-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 5px 0;
+    }
 </style>
-</head>
 
 <body>
 
@@ -93,5 +111,23 @@
                 <button type="submit">Complete Purchase</button>
             </form>
         </section>
+
+        <div class="summary-container">
+            <div class="summary-title">Order Summary</div>
+            <div class="summary-item">
+                <span>Subtotal:</span>
+                <span>${{ $totalPriceOfProducts }}</span>
+            </div>
+            <div class="summary-item">
+                <span>Shipping:</span>
+                <span>$5.00</span> <!-- Change this value as needed -->
+            </div>
+            <div class="summary-item" style="font-weight: bold;">
+                <span>Total:</span>
+                <span>${{ $totalPriceOfProducts + 5.00 }}</span> <!-- Adjust for shipping -->
+            </div>
+        </div>
     </main>
+
     @include('includes.footer')
+</body>
