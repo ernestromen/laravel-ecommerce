@@ -74,16 +74,18 @@
                   </div>
                </nav>
             </div>
-
             <div class="col-md-2 pt-3">
+               @if(Auth::check() && !auth()->user()->hasRole('Admin'))
+               <a href="{{ route(!Auth::check() ? 'guest_cart' : 'show_cart', ["id" => Auth::id()]) }}"
+                 title="login user">
+                 <span class='badge badge-secondary' id='cart_count'>{{$cartItemCount}}</span>
+                 <i class="fa fa-shopping-cart pr-5" aria-hidden="true"></i>
+               </a>
+            @endif
                @if(!Auth::check())
                <a href="{{ route('login') }}" title="login user"><i class=" pr-3 fa fa-sign-in"
                    aria-hidden="true"></i></a>
             @else
-               <a href="{{ route('show_cart', ["id" => Auth::id()]) }}" title="login user">
-               <span class='badge badge-secondary' id='lblCartCount'>5</span>  
-               <i class="fa fa-shopping-cart pr-5" aria-hidden="true"></i>
-               </a>
             @endif
                @if (Auth::user() !== null && Auth::user() !== '')
                <a class="pr-4 "

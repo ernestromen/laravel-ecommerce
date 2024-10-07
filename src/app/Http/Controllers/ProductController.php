@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Product;
 use App\Models\Cart;
+use App\Models\Category;
 
 class ProductController extends Controller
 {
@@ -23,12 +24,7 @@ class ProductController extends Controller
         return view("products", ["products" => Product::all()]);
     }
 
-    public function create()
-    {
-        //
-    }
-
-    public function store(Request $request, string $id)
+    public function storeImage(Request $request, string $id)
     {
 
         $request->validate([
@@ -43,11 +39,6 @@ class ProductController extends Controller
         $request->imageUrl->move(public_path('images'), $originalName);
 
         return redirect()->back()->with('success', 'File uploaded successfully!');
-    }
-
-    public function show(string $id)
-    {
-        //
     }
 
     public function edit(string $id)
@@ -72,10 +63,12 @@ class ProductController extends Controller
     public function destroy(string $id)
     {
         Product::destroy($id);
-        return redirect()->back();
+
+        return redirect()->back()->with('success', 'Successfully deleted product!');
     }
 
-    public function addProductToCart($productId)
+
+    public function addProductToCart($productId, Request $request)
     {
         $product = Product::find($productId);
         $cart = Cart::where('user_id', '=', Auth::id())->first();
@@ -86,13 +79,58 @@ class ProductController extends Controller
 
                 if ($cartItem->id == (int) $productId) {
                     $currentQuantity = $cartItem->pivot->quantity;
-                    $newQuantity = ++$currentQuantity;
+                    $newQuantity = (int) $request->quantity == 1 ? ++$currentQuantity : (int) $request->quantity + $currentQuantity;
                     $cart->products()->updateExistingPivot($cartItem, ['quantity' => $newQuantity]);
                 }
             }
         } else {
-            $cart->products()->attach($product->id, ['quantity' => 1]);
+            (int) $request->quantity == 1 ? $cart->products()->attach($product->id, ['quantity' => 1])
+                : $cart->products()->attach($product->id, ['quantity' => (int) $request->quantity])
+            ;
         }
         return redirect()->back();
+    }
+
+    public function addProductToSessionCart($productId, Request $request)
+    {
+        $product = Product::find($productId);
+        $request->session()->push('productInCart', [
+            'id' => $product->id,
+            'name' => $product->name,
+            'price' => $product->price,
+            'quantity' => $request->get('quantity')
+        ]);
+
+        return redirect()->back();
+    }
+
+    public function createProduct()
+    {
+        $categories = Category::all();
+
+        return view("create_product", ['categories' => $categories]);
+    }
+
+    public function storeCreatedProduct(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required|max:255',
+            'price' => 'required',
+            'SKU' => 'required',
+            'quantity' => 'required',
+            'category' => 'required'
+
+        ]);
+
+        $product = new Product();
+        $product->name = $request->name;
+        $product->description = $request->description;
+        $product->price = $request->price;
+        $product->quantity = $request->quantity;
+        $product->category_id = $request->category;
+        $product->save();
+
+        return redirect()->back()->with('success', 'Successfully added product!');
     }
 }

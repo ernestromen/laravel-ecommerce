@@ -7,7 +7,20 @@
 
         </div>
         <div class="col-8">
-            @csvButton($products)
+            @if (session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
+            <div class="row">
+                <div class="col-6">
+                    @role('admin')
+                    <a class="btn btn-secondary" href={{route('create_product')}}>Add Product</a>
+                    @endrole
+                </div>
+                <div class="col-6"> @csvButton($products)
+                </div>
+            </div>
             <table class="table border">
                 <thead>
                     <tr class="text-center">

@@ -4,25 +4,33 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
-use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
 
     public function index()
     {
-        $categories = Category::all();
-        return view("categories", ["categories" => $categories]);
+        return view("categories", ["categories" => Category::all()]);
     }
 
-    public function create()
+    public function createCategory()
     {
-        //
+        return view("create_category");
     }
 
-    public function store(Request $request)
+    public function storeCategory(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required|max:255',
+        ]);
+
+        $category = new Category();
+        $category->name = $request->name;
+        $category->description = $request->description;
+        $category->save();
+
+        return redirect()->back()->with('success', 'Successfully added category!');
     }
 
     public function show(string $id)

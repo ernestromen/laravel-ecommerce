@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '14a0936e76fa945e9f2a928cad599bc1361b6269',
+        'reference' => 'bf42cef15ff75fe3dff1873bae436f913a690623',
         'name' => '__root__',
         'dev' => true,
     ),
@@ -16,7 +16,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '14a0936e76fa945e9f2a928cad599bc1361b6269',
+            'reference' => 'bf42cef15ff75fe3dff1873bae436f913a690623',
             'dev_requirement' => false,
         ),
         'league/csv' => array(

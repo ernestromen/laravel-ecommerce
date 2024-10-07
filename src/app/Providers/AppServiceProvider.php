@@ -12,6 +12,7 @@ use App\Listeners\StartCartListener;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
+use App\Models\Cart;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -33,6 +34,31 @@ class AppServiceProvider extends ServiceProvider
     ];
     public function boot(): void
     {
+        View::composer('*', function ($view) {
+            if (Auth::check() && Auth::id() != 1) {
+                $cart = Cart::where('user_id', '=', Auth::id())->first();
+                $cartProducts = $cart->products()->get();
+                $cartItemCount = 0;
+
+                foreach ($cartProducts as $product) {
+                    $quantityOfProduct = $product->pivot->quantity;
+                    $cartItemCount += $quantityOfProduct;
+                }
+
+                $view->with('cartItemCount', $cartItemCount);
+            } else {
+                $cartItemCount = 0;
+                if (\Session::has('productInCart')) {
+                    foreach (\Session::get('productInCart') as $product) {
+                        $cartItemCount += $product['quantity'];
+
+                    }
+                }
+
+                $view->with('cartItemCount', $cartItemCount);
+            }
+        });
+
         Event::listen(
             SendDownloadNotification::class,
         );

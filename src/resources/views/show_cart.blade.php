@@ -100,12 +100,13 @@
                                     {{csrf_field()}}
 
                                     <input name="quantity_input" class="quantity_input" type="number"
-                                        value="{{$product->pivot->quantity}}" min="1" autocomplete="off"
+                                        value="{{$product->pivot->quantity}}" min="0" autocomplete="off"
                                         data-id={{$product->id}} data-previous-number="{{$product->pivot->quantity}}">
                                 </form>
                             </td>
                             <td>
-                                <form action={{route('delete_cart_item', ['id' => $product->id])}} method="post" class="m-auto">
+                                <form class="delete_form" action={{route('delete_cart_item', ['id' => $product->id])}}
+                                    method="post" class="m-auto">
                                     {{csrf_field()}}
                                     <button class="btn btn-danger rounded-circle mb-2">
                                         <i class="fa fa-trash-o fa-lg" aria-hidden="true" title="delete model">
@@ -137,6 +138,45 @@
     $(document).ready(function () {
         @if($cartProducts->count() > 0)
 
+                function calculateSumOfProducts() {
+                    totalPrice = 0;
+                    totalQuantity = 0;
+                    $('tbody').each(function (index) {
+                        $('.product_row').each(function (idx) {
+                            var $currentRow = $(this);
+                            var priceText = $currentRow.find('.product_price').text().replace('$', '');
+                            var price = parseFloat(priceText);
+                            var quantity = parseFloat($currentRow.find('.quantity_input').val());
+                            totalQuantity += quantity;
+                            totalPrice += price * quantity;
+
+                        });
+                    });
+
+                    totalPrice = totalPrice[totalPrice.length - 1] == 0 ? totalPrice.replace(/.$/, "") : totalPrice;
+                    $('#cart_count').text(totalQuantity);
+                    $('.total_cost').text('$' + totalPrice);
+                }
+
+                $('.delete_form').on('submit', function () {
+                    let result = $(this).parent().parent().remove();
+
+                    calculateSumOfProducts()
+
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': "{{ csrf_token() }}",
+                        },
+                        type: "POST",
+                        url: "{{ route('delete_cart_item', ["id" => $product->id]) }}",
+                        // data: { actionTaken, focusValue },
+                        success: function (data) {
+                            console.log(data);
+                        },
+                    });
+                })
+
+
                 $(".quantity_input").on("focusout", function () {
                     console.log('focus');
                     console.log($(this).val());
@@ -156,30 +196,29 @@
 
                 });
 
-
-
                 $('.quantity_input').on('change', function () {
 
                     let value = $(this).data('previous-number');
                     actionTaken = $(this).val() > value ? 'inc' : 'dec';
-
+                    var currentQuantity = $(this).val()
                     let id = $(this).data('id');
+                    if ($(this).val() == 0) {
+                        $(this).parent().parent().parent().remove();
+                        let url = "{{ route('delete_cart_item', ["id" => '__ID__']) }}".replace('__ID__', id);
 
-                    let url = "{{ route('change_quantity', ["id" => '__ID__']) }}".replace('__ID__', id);
-                    totalPrice = 0;
-
-                    $('tbody').each(function (index) {
-                        $('.product_row').each(function (idx) {
-                            var $currentRow = $(this);
-                            var priceText = $currentRow.find('.product_price').text().replace('$', '');
-                            var price = parseFloat(priceText);
-                            var quantity = parseFloat($currentRow.find('.quantity_input').val())
-                            totalPrice += price * quantity;
-
+                        $.ajax({
+                            headers: {
+                                'X-CSRF-TOKEN': "{{ csrf_token() }}",
+                            },
+                            type: "POST",
+                            url: url,
+                            success: function (data) {
+                                console.log(data);
+                            },
                         });
-                    });
-                    $('.total_cost').text('$' + totalPrice);
-
+                    }
+                    let url = "{{ route('change_quantity', ["id" => '__ID__']) }}".replace('__ID__', id);
+                    calculateSumOfProducts()
 
                     $.ajax({
                         headers: {

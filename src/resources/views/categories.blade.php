@@ -6,7 +6,21 @@
         <div class="col-2">
         </div>
         <div class="col-8">
-            @csvButton($categories)
+            @if (session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
+            <div class="row">
+                <div class="col-6">
+                    @role('admin')
+                    <a class="btn btn-secondary" href="{{route('create_category')}}">Add Category</a>
+                    @endrole
+                </div>
+                <div class="col-6"> @csvButton($categories)
+                </div>
+
+            </div>
             <table class="table border">
                 <thead>
                     <tr class="text-center">

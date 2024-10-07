@@ -49,42 +49,36 @@
 
             <p>{{$currentProduct->description}}</p>
             <p><strong>{{$currentProduct->price}}$</strong></p>
-            <div class="mb-3">
-                <label for="quantity">Quantity:</label>
-                <input {{auth()->user() && auth()->user()->name == 'Admin' ? 'readonly' : ''}} type="number" id="quantity" name="quantity"
-                    min="1" value="1" class="form-control" style="width: 100px;">
-            </div>
-            @if(auth()->user() && auth()->user()->name != 'Admin')
-                <form id="idForm" action="{{ route('add_to_cart', ["id" => $currentProduct->id]) }}" method="post">
-                    @csrf
-                    <input type="submit" class="btn btn-primary" value="Add to Cart" />
 
-                </form>
+            @if(!Auth::check() || auth()->user()->name != 'Admin')
+
+                @if(!Auth::check())
+                    <form id="idForm" action="{{ route('add_to_cart_session', ["id" => $currentProduct->id]) }}" method="post">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="quantity">Quantity:</label>
+                            <input {{auth()->user() && auth()->user()->name == 'Admin' ? 'readonly' : ''}} type="number"
+                                id="quantity" name="quantity" min="1" value="1" class="form-control" style="width: 100px;">
+                        </div>
+                        <input type="submit" class="btn btn-danger" value="Add to Cart" />
+
+                    </form>
+                @else
+                    <form id="idForm" action="{{ route('add_to_cart', ["id" => $currentProduct->id]) }}" method="post">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="quantity">Quantity:</label>
+                            <input {{auth()->user() && auth()->user()->name == 'Admin' ? 'readonly' : ''}} type="number"
+                                id="quantity" name="quantity" min="1" value="1" class="form-control" style="width: 100px;">
+                        </div>
+                        <input type="submit" class="btn btn-primary" value="Add to Cart" />
+
+                    </form>
+                @endif
             @endif
         </div>
     </div>
 </div>
-
-<script>
-    //For future build of cart ajax function
-    // $("#idForm").submit(function (e) {
-
-    // e.preventDefault(); // avoid to execute the actual submit of the form.
-    // console.log('here');
-    // var form = $(this);
-    // var actionUrl = form.attr('action');
-
-    // $.ajax({
-    //     type: "POST",
-    //     url: actionUrl,
-    //     data: form.serialize(), // serializes the form's elements.
-    //     success: function (data) {
-    //         alert(data); // show response from the php script.
-    //     }
-    // });
-
-    // });
-</script>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
