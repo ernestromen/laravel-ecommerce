@@ -8,6 +8,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use App\Events\cartCreated;
+use Session;
 
 class UserController extends Controller
 {
@@ -56,10 +57,23 @@ class UserController extends Controller
         $user->password = bcrypt($request->password);
         $user->setRememberToken(Str::random(10));
         $user->save();
+
         event(new cartCreated($user));
+
+        $cart = $user->getCart($user->id);
+
+        if (Session::has('productInCart')) {
+            foreach (Session::get('productInCart') as $product) {
+
+                $cart->products()->attach($product['id'], ['quantity' => (int) $product['quantity']]);
+                Session::forget('productInCart');
+            }
+        }
+
         //attach the role_id that is needed 2 or 1 for admin
         $user->roles()->attach('2');
         Auth::login($user);
+
         return redirect('/')->with('user', $user);
     }
 

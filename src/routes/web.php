@@ -10,6 +10,8 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckOutController;
+use App\Http\Controllers\PaymentController;
+
 use App\Http\Middleware\{
     AdminAuthorization,
     CartUserVisibility,
@@ -80,7 +82,7 @@ Route::controller(CartController::class)->group(    function () {
     Route::get('/cart/{id}', 'showCart')->middleware(CartUserVisibility::class)->name('show_cart');
     Route::post('/cart/{id}', 'deleeteCartItem')->name('delete_cart_item');
     Route::post('/cart/{id}/change-quantity', 'changeQuantityOfProduct')->name('change_quantity');
-    Route::post('/cart/{id}/change-quantity', 'changeSessionQuantityOfProduct')->name('change_session_quantity');
+    Route::post('/cart/{id}/change-session-quantity', 'changeSessionQuantityOfProduct')->name('change_session_quantity');
 });
 
 Route::controller(CheckOutController::class)->group(function () {
@@ -93,3 +95,10 @@ Route::controller(LeadController::class)->group(function () {
     Route::get('/lead/{id}', 'edit')->name('edit_lead');
     Route::post('/lead/{id}', 'update');
 });
+
+Route::get('payment', function () {
+    return view('create');
+});
+
+Route::post('create', [PaymentController::class, 'createPayment'])->name('create');
+Route::get('status', [PaymentController::class, 'paymentStatus'])->name('status');

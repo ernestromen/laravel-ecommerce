@@ -71,4 +71,9 @@ class User extends Authenticatable
     {
         return $this->roles->pluck('id')->implode(', ');
     }
+
+    public function getCart($userId){
+        $cart = Cart::where('user_id', '=', $userId)->first();
+        return $cart;
+    }
 }

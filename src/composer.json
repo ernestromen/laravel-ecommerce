@@ -12,6 +12,7 @@
         "laravel/framework": "^11.0",
         "laravel/tinker": "^2.9",
         "league/csv": "^9.16",
+        "paypal/rest-api-sdk-php": "*",
         "stripe/stripe-php": "^15.6",
         "symfony/http-client": "^7.1",
         "symfony/mailgun-mailer": "^7.1"
