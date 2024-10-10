@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
    <meta charset="utf-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,7 +10,7 @@
    <meta name="description" content="">
    <meta name="author" content="">
    <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
-   <link rel="stylesheet" href="{{asset('css/style.css?v=1a220')}}">
+   <link rel="stylesheet" href="{{asset('css/style.css?v=1a22s11232322123126820')}}">
    <link rel="stylesheet" href="{{asset('css/responsive.css?v=1a03')}}">
    <link rel="icon" href="images/fevicon.png" type="image/gif" />
    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
@@ -31,10 +30,15 @@
          border-bottom: 1px solid white;
 
       }
-   </style>
+body{
+   overflow-x: hidden;
+}
+html{
+   overflow-x: hidden;
+}
+</style>
 
 </head>
-
 <body>
    <header>
       <div class="container-fluid">
@@ -104,7 +108,5 @@
             @endif
             </div>
          </div>
-      </div>
-      </div>
       </div>
    </header>

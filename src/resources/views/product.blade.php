@@ -1,11 +1,5 @@
 @include('includes.header')
-<style>
-    /* Customize styles here */
-    .product-img {
-        max-width: 100%;
-        height: auto;
-    }
-</style>
+
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-6">

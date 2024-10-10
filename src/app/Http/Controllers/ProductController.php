@@ -94,7 +94,6 @@ class ProductController extends Controller
     public function addProductToSessionCart($productId, Request $request)
     {
         $product = Product::find($productId);
-        dd($product);
         $request->session()->push('productInCart', [
             'id' => $product->id,
             'name' => $product->name,

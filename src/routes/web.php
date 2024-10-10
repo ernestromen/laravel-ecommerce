@@ -80,7 +80,7 @@ Route::controller(CartController::class)->group(    function () {
     Route::get('/cart/guest-cart', 'showGuestCart')->name('guest_cart');
     Route::post('/cart/guest-cart', 'deleteSessionCartItem')->name('delete_session_cart_item');
     Route::get('/cart/{id}', 'showCart')->middleware(CartUserVisibility::class)->name('show_cart');
-    Route::post('/cart/{id}', 'deleeteCartItem')->name('delete_cart_item');
+    Route::post('/cart/{id}', 'deleteCartItem')->name('delete_cart_item');
     Route::post('/cart/{id}/change-quantity', 'changeQuantityOfProduct')->name('change_quantity');
     Route::post('/cart/{id}/change-session-quantity', 'changeSessionQuantityOfProduct')->name('change_session_quantity');
 });

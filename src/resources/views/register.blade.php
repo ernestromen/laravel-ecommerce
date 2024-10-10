@@ -6,14 +6,14 @@
     <div class="col-4">
 
       @if ($errors->any())
-    <div class="alert alert-danger">
+      <div class="alert alert-danger">
       <ul>
-      @foreach ($errors->all() as $error)
-    <li>{{ $error }}</li>
-  @endforeach
+        @foreach ($errors->all() as $error)
+      <li>{{ $error }}</li>
+    @endforeach
       </ul>
-    </div>
-  @endif
+      </div>
+    @endif
 
       <form method="post" class="login_form">
         {{csrf_field()}}

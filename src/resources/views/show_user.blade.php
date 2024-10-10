@@ -1,7 +1,5 @@
 @include('includes.header')
-<style>
 
-</style>
 <main>
     <section class="user-container">
         <div class="user-info">
