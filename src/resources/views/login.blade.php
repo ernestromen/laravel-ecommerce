@@ -1,9 +1,9 @@
 @include('includes.header')
 
 <div class="container-fluid">
-    <div class="row mt-5">
-        <div class="col-4"></div>
-        <div class="col-4">
+    <div class="row mt-5 mb-5">
+        <div class="col-xl-4 col-lg-3 col-md-1 col-1 d-md-block d-none"></div>
+        <div class="col-xl-4 col-lg-6 col-md-10 col-12">
 
             <form method="post" class="login_form">
                 {{csrf_field()}}
@@ -21,12 +21,12 @@
                 </div>
 
 
-                <button type="submit" class="btn btn-light text-dark">Login</button>
+                <button type="submit" class="btn btn-light text-dark w-100">Login</button>
             </form>
 
 
         </div>
-        <div class="col-4"></div>
+        <div class="col-xl-4 col-lg-3 col-md-1 col-1 d-md-block d-none"></div>
 
     </div>
 </div>

@@ -2,7 +2,7 @@
    <div class="footer">
       <div class="container">
          <div class="row">
-            <div class="col-md-3 col-sm-6">
+            <div class="col-md-3 col-sm-6 mb-sm-0 mb-5">
                <div class="infoma text_align_left">
                   <h3>About</h3>
                   <p class="ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sedconsectetur </p>
@@ -26,24 +26,12 @@
                   </ul>
                </div>
             </div>
-            <div class="col-md-3 pad_lrft col-sm-6">
-               <div class="infoma">
-                  <h3>Links</h3>
-                  <ul class="fullink">
-                     <li><a href="index.html">Home</a></li>
-                     <li><a href="about.html">About</a></li>
-                     <li><a href="shop.html">Shop</a></li>
-                     <li><a href="quality.html">Quality</a></li>
-                     <li><a href="contact.html">Contact</a></li>
-                  </ul>
-               </div>
-            </div>
             <div class="col-md-3 col-sm-6">
             </div>
          </div>
       </div>
       <div class="copyright">
-         <div class="container">
+         <div class="container pt-0">
             <div class="row">
                <div class="col-md-12">
                   <p>© 2020 All Rights Reserved. <a href="https://html.design/"> Free html Templates</a></p>

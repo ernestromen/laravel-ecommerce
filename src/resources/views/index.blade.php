@@ -179,7 +179,7 @@
 </div>
 
 
-<div class="contact">
+<div class="pt-sm-5 pt-2">
    <div class="container">
       <div class="row ">
          <div class="col-md-12">

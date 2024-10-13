@@ -6,7 +6,7 @@
         <div class="col-2">
 
         </div>
-        <div class="col-8">
+        <div class="col-8 " style='overflow-x:auto'>
             @if (session('success'))
                 <div class="alert alert-success">
                     {{ session('success') }}

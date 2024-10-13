@@ -1,9 +1,9 @@
 @include('includes.header')
 
 <div class="container-fluid">
-  <div class="row mt-5">
-    <div class="col-4"></div>
-    <div class="col-4">
+  <div class="row mt-md-5 mt-4">
+    <div class="col-xl-4 col-lg-3 col-md-2 col-1 d-sm-block d-none"></div>
+    <div class="col-xl-4 col-lg-6 col-md-8 col-sm-10 col-12">
 
       @if ($errors->any())
       <div class="alert alert-danger">
@@ -36,13 +36,13 @@
         </div>
 
 
-        <button type="submit" class="btn btn-light text-dark">Register</button>
+        <button type="submit" class="btn btn-light text-dark w-100">Register</button>
       </form>
       <a href="{{route('login')}}">Already have a user?</a>
 
 
     </div>
-    <div class="col-4"></div>
+    <div class="col-xl-4 col-lg-3 col-md-2 col-1 d-sm-block d-none"></div>
 
   </div>
 </div>

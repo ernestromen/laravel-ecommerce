@@ -37,7 +37,7 @@
 
             <div class="col-xl-8 col-md-7 col-3 order-md-2 order-1">
                <nav
-                  class="navbar navbar-expand-md navbar-light bg-light responsive-navigation bg-transparent justify-content-md-center justify-content-start">
+                  class="navbar navbar-expand-md navbar-dark bg-light responsive-navigation bg-transparent justify-content-md-center justify-content-start">
                   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
                      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                      <span class="navbar-toggler-icon"></span>
