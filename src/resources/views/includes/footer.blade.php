@@ -1,4 +1,4 @@
-<footer>
+<footer class="border-top">
    <div class="footer">
       <div class="container">
          <div class="row">
@@ -6,7 +6,7 @@
                <div class="infoma text_align_left">
                   <h3>About</h3>
                   <p class="ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sedconsectetur </p>
-                  <ul class="social_icon">
+                  <ul class="social_media_icon">
                      <li><a href="Javascript:void(0)"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
                      <li><a href="Javascript:void(0)"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
                      <li><a href="Javascript:void(0)"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a></li>
@@ -53,6 +53,9 @@
       </div>
    </div>
 </footer>
+<script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.min.js"></script>
 </body>
 
 </html>

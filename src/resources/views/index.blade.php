@@ -2,7 +2,7 @@
 <header>
    <div class="full_bg">
       <div class="slider_main">
-         <div class="container">
+         <div class="container-fluid">
             <div class="row">
                <div class="col-md-12">
                   <!-- carousel code -->
@@ -101,13 +101,13 @@
    </div>
 </header>
 
-<div class="about">
-   <div class="container">
+<div class="about" style="background-color:white !important;">
+   <div class="container" style="background-color:white !important;box-shadow:none !important;">
       <div class="row d_flex">
          <div class="col-md-6">
             <div class="titlepage text_align_left">
-               <h2>About Our Honey</h2>
-               <p>There are many variations of passages of Lorem Ipsum available, but the majority have sufferedThere
+               <h2 style="color:black !important;">About Our Honey</h2>
+               <p style="color:black !important;">There are many variations of passages of Lorem Ipsum available, but the majority have sufferedThere
                   are many variations of passages of Lorem Ipsum available, but the majority have sufferedThere are many
                   variations of passages of Lorem Ipsum available, but the majority have suffered
                </p>
@@ -137,37 +137,37 @@
       </div>
       <div class="row">
          <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
-            <div class="quality-box ">
+            <div class="honey-box">
                <figure><img src="images/quality1.png" alt="#" /></figure>
             </div>
          </div>
          <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
-            <div class="quality-box ">
+            <div class="honey-box">
                <figure><img src="images/quality2.png" alt="#" /></figure>
             </div>
          </div>
          <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
-            <div class="quality-box ">
+            <div class="honey-box">
                <figure><img src="images/quality3.png" alt="#" /></figure>
             </div>
          </div>
          <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
-            <div class="quality-box ">
+            <div class="honey-box">
                <figure><img src="images/quality4.png" alt="#" /></figure>
             </div>
          </div>
          <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
-            <div class="quality-box ">
+            <div class="honey-box">
                <figure><img src="images/quality5.png" alt="#" /></figure>
             </div>
          </div>
-         <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">currentUser
-            <div class="quality-box ">
+         <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+            <div class="honey-box">
                <figure><img src="images/quality7.png" alt="#" /></figure>
             </div>
          </div>
          <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
-            <div class="quality-box ">
+            <div class="honey-box">
                <figure><img src="images/quality8.png" alt="#" /></figure>
             </div>
          </div>

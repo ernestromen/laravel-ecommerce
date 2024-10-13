@@ -34,14 +34,21 @@
 }
 
 .container {
-     max-width: 1170px;
+     max-width: 1170px !important;
+     margin: 20px auto;
+     padding: 20px;
+     background-color: transparent !important;
+     border-radius: 8px;
+     box-shadow: none !important;
 }
 
 html {
      scroll-behavior: smooth;
+     overflow-x: hidden;
 }
 
 body {
+     overflow-x: hidden;
      color: #fff;
      font-size: 14px;
      font-family: 'Poppins', sans-serif;
@@ -52,6 +59,11 @@ body {
      background-position: center;
      background-repeat: no-repeat;
 }
+
+header {
+     border-bottom: 1px solid white;
+
+        }
 
 a {
      color: #1f1f1f;
@@ -368,6 +380,18 @@ button {
      text-orientation: mixed;
 }
 
+.responsive-navigation.navbar a{
+     padding: 15px 0px;
+     color: #fff;
+     font-size: 17px;
+     line-height: 20px;
+     font-weight: 400;
+     border-radius: 30px;
+     text-transform: uppercase;
+     text-orientation: mixed;
+     color: #fff !important;
+}
+
 .navigation.navbar-dark .navbar-nav .nav-link:focus,
 .navigation.navbar-dark .navbar-nav .nav-link:hover {
      color: #d96226;
@@ -490,15 +514,6 @@ ul.conta_top li a {
      line-height: 80px;
 }
 
-.carousel .icon-container {
-     /* display: inline-block;
-     font-size: 25px;
-     line-height: 25px;
-     padding: 1em;
-     text-align: center;
-     border-radius: 50%; */
-}
-
 .slider_main .carousel-indicators {
      display: none;
 }
@@ -538,16 +553,9 @@ ul.conta_top li a {
      margin: 0;
 }
 
-
-/** end banner section **/
-
-
-/** about section **/
-
 .about {
      background: #fff;
      padding: 90px 0;
-     /* margin-top: 180px; */
      position: relative;
 }
 
@@ -582,12 +590,6 @@ ul.conta_top li a {
      margin: 0;
 }
 
-
-/** end about section **/
-
-
-/** quality **/
-
 .quality {
      padding-top: 90px;
 }
@@ -600,6 +602,19 @@ ul.conta_top li a {
 
 .quality-box {
      background: #fff;
+     height: 262px;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     border-radius: 50%;
+     width: 100%;
+     max-width: 262px;
+     margin: 0 auto;
+     margin-bottom: 30px;
+}
+
+.honey-box{
+     background: #fff !important;
      height: 262px;
      display: flex;
      align-items: center;
@@ -624,12 +639,6 @@ ul.conta_top li a {
      margin-top: 30px !important;
 }
 
-
-/** end quality **/
-
-
-/** contact **/
-
 .contact {
      padding-bottom: 90px;
      padding-top: 88px;
@@ -648,7 +657,7 @@ ul.conta_top li a {
      color: #fafbfc;
      font-size: 17px;
      font-weight: normal;
-     border: #c0b1ad solid 1px;
+     border: #c0b1ad solid 1px !important;
 }
 
 .main_form .textarea {
@@ -691,12 +700,6 @@ ul.conta_top li a {
      opacity: 1;
 }
 
-
-/** end contact **/
-
-
-/** honey_bg **/
-
 .honey_bg {
      margin: 0 auto;
      display: block;
@@ -711,14 +714,8 @@ ul.conta_top li a {
      display: block;
 }
 
-
-/** end honey_bg **/
-
-
-/** footer **/
-
 .footer {
-     padding-top: 120px;
+     border-top: 1px solid black;
      text-align: center;
 }
 
@@ -744,17 +741,18 @@ ul.conta_top li a {
      padding-top: 12px;
 }
 
-ul.social_icon {
+ul.social_media_icon {
      float: left;
      padding-top: 30px;
 }
 
-ul.social_icon li {
+ul.social_media_icon li {/* end newsletter*/
+
      display: inline-block;
      margin: 0 3px;
 }
 
-ul.social_icon li a {
+ul.social_media_icon li a {
      background: #fff;
      width: 33px;
      height: 33px;
@@ -765,16 +763,18 @@ ul.social_icon li a {
      border-radius: 30px;
 }
 
-ul.social_icon li a i {
+ul.social_media_icon li a i {
      font-size: 19px;
      transition: ease-in all 0.5s;
 }
 
-ul.social_icon li a:hover {
+ul.social_media_icon li a:hover {
      color: #fff;
      background: #d96226;
      transition: ease-in all 0.5s;
 }
+
+
 
 .infoma ul li {
      font-size: 14px;
@@ -871,11 +871,7 @@ ul.conta li a:hover {
      color: #fff;
 }
 
-
-/* end newsletter*/
-
 .copyright {
-     margin-top: 60px;
      padding-bottom: 25px;
 }
 
@@ -1169,15 +1165,6 @@ ul.conta li a:hover {
      background-color: #0056b3;
  }
 
- .container {
-     max-width: 960px;
-     margin: 20px auto;
-     padding: 20px;
-     background-color: #fff;
-     border-radius: 8px;
-     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
- }
-
  h1 {
      text-align: center;
      margin-bottom: 30px;
@@ -1425,3 +1412,33 @@ ul.conta li a:hover {
  .checkout-btn:hover {
      background-color: #27ae60;
  }
+
+
+ @media (max-width: 575px) {
+
+     .fa-shopping-cart{
+          position: relative;top: -46%;
+          left: -29%;
+     }
+   }
+   @media (max-width: 575px) {
+
+     .fa-shopping-cart{
+          position: relative;top: -46%;
+          left: -29%;
+     }
+   }
+
+   @media (max-width: 488px) {
+     #cart_count{
+          margin-left: 8px;
+          margin-top: 7px;
+     }
+     .icon_adjusting{
+          padding-top:2px;
+     }
+   }
+
+   
+   
+   
